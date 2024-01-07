@@ -1,0 +1,19 @@
+.user-header{
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.follow-btn{
+  border: none;  
+  height: 30px;
+  width: 100px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px grey;
+  font-size: smaller;
+  font-weight: 500;
+}
+
+.follow-btn:hover {
+    transform: translateY(-3px);
+}

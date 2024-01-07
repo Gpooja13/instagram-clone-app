@@ -1,0 +1,51 @@
+.createPost {
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.create-header {
+    display: flex;
+}
+
+#btn-createPost {
+    border: none;
+    background-color: white;
+    color: #0095f6;
+    font-weight: 500;
+    font-size: large;
+}
+
+.post-caption {
+    width: 95%;
+    border: none;
+    outline: none;
+    margin: 10px;
+}
+
+.create-details {
+    display: flex;
+    align-items: center;
+    padding: 10px 6px;
+}
+
+.create-details>h5 {
+    margin-left: 10px;
+}
+
+.create-details img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview{
+    width: 100%;
+    margin: 4px;
+}

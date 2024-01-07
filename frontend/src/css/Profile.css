@@ -1,0 +1,38 @@
+.profile{
+max-width: 800px;
+margin: 10px auto;
+}
+
+.profile-frame{
+display: flex;
+justify-content:space-evenly;
+}
+
+.profile-pic img{
+width: 160px;
+height: 160px;
+object-fit:cover;
+border-radius: 50%;
+}
+
+.profile-data{
+    text-align: left;
+}
+
+.profile-info{
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+}
+
+.gallery{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gallery img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    margin: 5px;
+}

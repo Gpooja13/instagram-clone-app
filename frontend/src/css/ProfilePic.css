@@ -1,0 +1,60 @@
+.dark-bg {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.profilePic-modal {
+    width: 300px;
+    height: 180px;
+    background-color: white;
+    z-index: 10;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+}
+
+.modal-heading {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .profilePic-close-btn {
+    border: none;
+    background-color: rgb(255, 255, 255);
+    color:grey;
+    font-size:x-large;
+    position: absolute;
+    left: 87%;
+    top: 0%;
+    border-radius: 20px;
+} */
+
+.profile-btn{
+    border: none;
+    width: inherit;
+    height: 40px;
+    background-color: white;
+    font-weight: 500;
+}
+
+.profilePic-menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2px ;
+}

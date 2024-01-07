@@ -1,0 +1,66 @@
+.signUp-logo{
+    width:160px ;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.main-content{
+    width:450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa36;
+    padding: 30px; 
+}
+
+.sec-content{
+    width:450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa36;
+    padding: 20px; 
+}
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.btn-signUp{
+    width: 100%;
+    color: white;
+    background-color: #0d86d6;
+}
+
+.signUp{
+    background-image: url(https://t4.ftcdn.net/jpg/06/55/50/69/360_F_655506911_1p13PsGKM93SuCePkLUcd75TW1Bzu4jg.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+
+.form-floating>.form-control,
+.form-floating>.form-control-plaintext {
+    padding: 1rem 0.75rem 0.2rem 0.75rem !important;
+}
+
+.form-floating>.form-control,
+.form-floating>.form-control-plaintext,
+.form-floating>.form-select {
+  height: calc(2.5rem + 2px) !important;
+  min-height: 52px;
+  line-height: 1 !important;
+  font-size: 16px;
+}
+
+.form-floating>label {
+  padding: 0.8rem 0.75rem !important;
+  font-size: 14px;
+}

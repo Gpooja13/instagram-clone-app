@@ -1,0 +1,141 @@
+.material-symbols-outlined-red {
+  color: red;
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 500,
+    'GRAD' 0,
+    'opsz' 24
+}
+
+.material-symbols-outlined {
+  cursor: pointer;
+}
+
+.card {
+  max-width: 500px;
+  height: max-content;
+  margin: 25px auto;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 6px;
+  width: inherit;
+}
+
+.card-header>h5 {
+  margin-left: 15px;
+}
+
+.card-pic img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card-image img {
+  width: 100%;
+}
+
+.card-content {
+  line-height: 4px;
+}
+
+.add-comment {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.add-comment input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+}
+
+.btn-comment {
+  border: none;
+  background-color: white;
+  font-weight: 500;
+  color: #0095f6;
+}
+
+
+
+
+
+
+
+.showComment {
+  width: 100vw;
+  min-height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+}
+
+.post-container {
+  display: flex;
+  background-color: white;
+  width: 80%;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  height: 500px;
+  padding:0;
+}
+
+.post-pic {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.post-pic img {
+  object-fit: contain;
+  width: 100%;
+}
+
+.details {
+  width: 100%;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.comment-section{
+  flex-grow: 4;
+  text-align: left;
+  margin-left:10px ;
+  line-height: 15px;
+  width: inherit;
+  padding: 10px 5px; 
+}
+
+.close-comment{
+  position: fixed;
+  top:2%;
+  right:5%;
+  color: white;
+}
+
+.card-caption{
+  width: inherit;
+  padding: 15px 10px; 
+}
+
+.card-like-content{
+  width: inherit;
+  padding:6px; 
+  line-height: 18px;
+}
+
+.card-like-content p{
+  margin: 0;
+}
