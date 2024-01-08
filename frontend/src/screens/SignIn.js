@@ -22,7 +22,7 @@ const SignIn = () => {
       notifyA("Invalid email");
       return;
     }
-    const fetchSignIn = await fetch("/signIn", {
+    const fetchSignIn = await fetch("http://localhost:5000/signIn", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

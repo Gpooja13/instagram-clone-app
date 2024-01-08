@@ -22,7 +22,7 @@ const MyFollowingPost = () => {
       navigate("/signIn");
     }
     // Fetching all posts
-    fetch("/myfollowingpost", {
+    fetch("http://localhost:5000/myfollowingpost", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -42,7 +42,7 @@ const MyFollowingPost = () => {
   };
 
   const likePost = (id) => {
-    fetch("/like", {
+    fetch("http://localhost:5000/like", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const MyFollowingPost = () => {
   };
 
   const unlikePost = (id) => {
-    fetch("/unlike", {
+    fetch("http://localhost:5000/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const MyFollowingPost = () => {
   };
 
   const makeComment = (text, id) => {
-    fetch("/comment", {
+    fetch("http://localhost:5000/comment", {
       method: "put",
       headers: {
         "Content-Type": "application/json",

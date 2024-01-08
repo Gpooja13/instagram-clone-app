@@ -64,4 +64,21 @@ router.post("/signIn", (req, res) => {
   });
 });
 
+router.post("/googleLogin", (req, res) => {
+  const { email_verified, email, name, clientId, userName, Photo } = req.body;
+  if (email_verified) {
+    USER.findOne({ email: email }).then((savedUser) => {
+      if (!savedUser) {
+        return res.status(422).json({ error: "Invalid email" });
+      }
+      
+            const token = jwt.sign({ id: savedUser._id }, jwtSecret);
+            const { _id, name, email, username } = savedUser;
+            res.json({ token, user: { _id, name, email, username } });
+            // return res.status(200).json({ message: "Signed in successfully" });
+      console.log(savedUser);
+    });
+  }
+});
+
 module.exports = router;

@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logo_word from "../img/logo_word.png";
 import "../css/SignUp.css";
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ const SignUp = () => {
       return;
     }
 
-    const fetchSignUp = await fetch("/signUp", {
+    const fetchSignUp = await fetch("http://localhost:5000/signUp", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -127,6 +129,17 @@ const SignUp = () => {
           <button type="submit" className="btn btn-primary btn-signUp my-2">
             Sign Up
           </button>
+
+          <GoogleLogin
+  onSuccess={credentialResponse => {
+    console.log(credentialResponse);
+    const jwtDetail=jwtDecode(credentialResponse.credential)
+    console.log(jwtDetail);
+  }}
+  onError={() => {
+    console.log('Login Failed');
+  }}
+/>
           <div>
             <p style={{ fontSize: "13.5px", margin: "5px 0" }}>
               By signing up, you agree to out Terms, privacy policy and cookies

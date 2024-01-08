@@ -26,14 +26,14 @@ mongoose.connection.on("error", () => {
 });
 
 //serving the frontend
-app.use(express.static(path.join(__dirname, "./frontend/build")));
+// app.use(express.static(path.join(__dirname, "./frontend/build")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./frontend/build/index.html")),
-    function (err) {
-      res.status(500).send(err);
-    }
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./frontend/build/index.html")),
+//     function (err) {
+//       res.status(500).send(err);
+//     }
+// });
 
 app.listen(PORT, () => {
   console.log("Connected to server on " + PORT);

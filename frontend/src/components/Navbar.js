@@ -11,100 +11,116 @@ const Navbar = (props) => {
     if (token || props.login) {
       return [
         <>
-          <nav className="navbar navbar-expand-lg bg-body-tertiary shadow-sm bg-body-tertiary rounded">
-            <div className="container-fluid">
-              <Link className="navbar-brand" to="/">
-                <img className="logo" src={logo_word} alt="Instagram" />
-              </Link>
-              <button
-                className="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span className="navbar-toggler-icon"></span>
-              </button>
-
-              <div
-                className="collapse navbar-collapse"
-                id="navbarSupportedContent"
-              >
-                <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link active"
-                      aria-current="page"
-                      to="/myfollowingpost"
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link active"
-                      aria-current="page"
-                      to="/"
-                    >
-                      Explore
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link active"
-                      aria-current="page"
-                      to="/createPost"
-                    >
-                      Create
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link active"
-                      aria-current="page"
-                      to="/profile"
-                    >
-                      Profile
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link active"
-                      aria-current="page"
-                      // to={""}
-                    >
-                      <button
-                        onClick={() => {
-                          setModalOpen(true);
-                        }}
-                      >
-                        Logout
-                      </button>
-                    </Link>
-                  </li>
-                </ul>
-                {/* <form className="d-flex" role="search">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-success" type="submit">Search</button>
-      </form> */}
-              </div>
-            </div>
+          <nav className="main-menu">
+            <ul className="menu-container">
+              <li>
+                <Link className="" to="/">
+                  <img className="logo" src={logo_word} alt="Instagram" />
+                </Link>
+              </li>
+              <li className="">
+                <Link to="/myfollowingpost">
+                  <span class="material-symbols-outlined menu-icon">home</span>
+                  <span className="menu-text"> Home</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/">
+                  <span class="material-symbols-outlined menu-icon">
+                    explore
+                  </span>
+                  <span className="menu-text">Explore</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/createPost">
+                  <span class="material-symbols-outlined menu-icon">
+                    add_box
+                  </span>
+                  <span className="menu-text"> Create</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/profile">
+                  <span class="material-symbols-outlined menu-icon">
+                    account_circle
+                  </span>
+                  <span className="menu-text">Profile</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link onClick={() => {
+                      setModalOpen(true);
+                    }}>
+                  <span
+                    class="material-symbols-outlined menu-icon"
+                  >
+                    logout
+                  </span>
+                  <span className="menu-text">Logout</span>
+                </Link>
+              </li>
+            </ul>
           </nav>
         </>,
       ];
     } else {
+      return [<></>];
+    }
+  };
+
+  const loginStatusMobile = () => {
+    const token = localStorage.getItem("jwt");
+    if (token || props.login) {
       return [
         <>
+          <nav className="mob-main-menu">
+            <ul className="mob-menu-container">
+              <li className="">
+                <Link className="" to="/myfollowingpost">
+                  <span class="material-symbols-outlined menu-icon">home</span>
+                </Link>
+              </li>
+              <li className="">
+                <Link className="" aria-current="page" to="/">
+                  <span class="material-symbols-outlined menu-icon">explore</span>
+                </Link>
+              </li>
+              <li className="">
+                <Link className="" to="/createPost">
+                  <span class="material-symbols-outlined menu-icon">add_box</span>
+                </Link>
+              </li>
+              <li className="">
+                <Link className="" to="/profile">
+                  <span class="material-symbols-outlined menu-icon">account_circle</span>
+                </Link>
+              </li>
+              <li className="">
+                <Link className="">
+                  <span
+                    class="material-symbols-outlined menu-icon"
+                    onClick={() => {
+                      setModalOpen(true);
+                    }}
+                  >
+                    logout
+                  </span>
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </>,
       ];
+    } else {
+      return [<></>];
     }
   };
 
   return (
-    <div>
-     {loginStatus()}
+    <div className="main-navbar">
+      <ul className="nav-lap">{loginStatus()}</ul>
+      <ul className="nav-mobile">{loginStatusMobile()}</ul>
     </div>
   );
 };

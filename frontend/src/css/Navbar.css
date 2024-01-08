@@ -1,10 +1,85 @@
-.logo{
-    width:120px ;
-    object-fit: contain;
-    margin:0 40%
+.logo {
+  width: 120px;
+  object-fit: contain;
+  margin-bottom: 20px;
 }
 
-li{
-    padding: 0 15px;
+.main-menu {
+  height: 100vh;
+  width: 18%;
+  position: fixed;
+  border-right: 1px solid rgb(225 225 226);
+  left: 0;
+  top: 0;
+}
+
+.menu-container {
+  margin: 15px 25px;
+  padding: 0;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+
+li {
   font-size: large;
+  list-style: none;
+}
+
+li a {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+}
+
+.menu-icon {
+  font-size: xx-large;
+}
+
+.menu-text {
+  margin-left: 15px;
+}
+
+.nav-mobile {
+  display: none;
+}
+
+
+
+
+
+@media screen and (max-width:800px) {
+  .nav-mobile {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background-color: white;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    
+  }
+
+  .nav-lap {
+    display: none;
+  }
+  
+   .main-navbar ul {
+    margin: 0;
+    padding: 10px 0;
+  } 
+
+  .mob-menu-container {
+    display: flex;
+    justify-content: space-around;
+    width: inherit;
+  }
+
+  .menu-icon {
+    font-size: xxx-large;
+  }
 }
