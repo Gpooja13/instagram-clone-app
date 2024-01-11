@@ -128,7 +128,7 @@ const MyFollowingPost = () => {
                     alt="pic"
                   />
                 </div>
-                <h5>
+                <h5 className="user-name-heading">
                   <Link to={`/profile/${posts.postedBy._id}`}>
                     {posts.postedBy.name}
                   </Link>
@@ -144,7 +144,7 @@ const MyFollowingPost = () => {
                   JSON.parse(localStorage.getItem("user"))._id
                 ) ? (
                   <span
-                    class="material-symbols-outlined material-symbols-outlined-red"
+                    class="material-symbols-outlined material-symbols-outlined-red btn-margin"
                     onClick={() => {
                       unlikePost(posts._id);
                     }}
@@ -153,7 +153,7 @@ const MyFollowingPost = () => {
                   </span>
                 ) : (
                   <span
-                    class="material-symbols-outlined"
+                    class="material-symbols-outlined btn-margin"
                     onClick={() => {
                       likePost(posts._id);
                     }}
@@ -161,11 +161,27 @@ const MyFollowingPost = () => {
                     favorite
                   </span>
                 )}
+                <span
+                  class="material-symbols-outlined mx-2 btn-margin"
+                  onClick={() => {
+                    toggleComment(posts);
+                  }}
+                >
+                  mode_comment
+                </span>
 
-                <p>{posts.likes.length} Likes</p>
-                <p>{posts.body}</p>
+                <p className="text-bolder">{posts.likes.length} Likes</p>
+                <p>
+                  <span className="text-bolder">{posts.postedBy.name}</span>
+                  <span style={{ marginLeft: "8px" }}>{posts.body}</span>
+                </p>
                 <p
-                  style={{ fontWeight: "500", cursor: "pointer" }}
+                  style={{
+                    fontWeight: "500",
+                    cursor: "pointer",
+                    marginBottom: "0px",
+                    color:"#817b7b"
+                  }}
                   onClick={() => {
                     toggleComment(posts);
                   }}
@@ -175,7 +191,7 @@ const MyFollowingPost = () => {
               </div>
               {/* commment */}
               <div className="add-comment">
-                <span class="material-symbols-outlined">mood</span>
+              <span class="material-symbols-outlined" style={{color:"#8d8d99",fontSize:"larger"}}>mood</span>
                 <input
                   placeholder="Add a Comment"
                   value={comment}

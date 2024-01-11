@@ -9,19 +9,19 @@ const UserProfile = () => {
   const [isFollow, setIsFollow] = useState(false);
   const [user, setUser] = useState("");
   const [posts, setPosts] = useState([]);
+  const [refresh, setRefresh] = useState("")
 
-  //   const [pic, setpic] = useState([]);
-  //   const [show, setShow] = useState(false);
-  //   const [posts, setPosts] = useState([]);
+    const [pic, setPic] = useState([]);
+    const [show, setShow] = useState(false);
 
-  //   const toggleDetails = (posts) => {
-  //     if (show) {
-  //       setShow(false);
-  //     } else {
-  //       setShow(true);
-  //       setPosts(posts);
-  //     }
-  //   };
+    const toggleDetails = (posts) => {
+      if (show) {
+        setShow(false);
+      } else {
+        setShow(true);
+        setPosts(posts);
+      }
+    };
 
   const followUser = (userId) => {
     fetch("http://localhost:5000/follow", {
@@ -34,8 +34,8 @@ const UserProfile = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setIsFollow(true);
+        setRefresh(false)
       });
   };
 
@@ -53,6 +53,7 @@ const UserProfile = () => {
       .then((data) => {
         console.log(data);
         setIsFollow(false);
+        setRefresh(true)
       });
   };
 
@@ -65,7 +66,7 @@ const UserProfile = () => {
       .then((res) => res.json())
       .then((result) => {
         setUser(result.user);
-        setPosts(result.posts);
+        setPic(result.posts);
         console.log(
           result.user.followers.includes(
             JSON.parse(localStorage.getItem("user"))._id
@@ -82,7 +83,7 @@ const UserProfile = () => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [refresh]);
 
   return (
 
@@ -122,20 +123,20 @@ const UserProfile = () => {
       <hr />
       <div className="gallery">
         <div>
-          {posts.map((pics) => {
+          {pic.map((pics) => {
             return (
               <img
                 key={pics._id}
                 src={pics.photo}
                 onClick={() => {
-                  // toggleDetails(pics);
+                  toggleDetails(pics);
                 }}
               />
             );
           })}
         </div>
       </div>
-      {/* {show && <PostDetail item={posts} toggleDetails={toggleDetails} />} */}
+      {show && <PostDetail item={posts} toggleDetails={toggleDetails} />}
     </div>
   );
 };

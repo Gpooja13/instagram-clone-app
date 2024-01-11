@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logo_word from "../img/logo_word.png";
 import "../css/SignUp.css";
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+import { LoginContext } from "../context/LoginContext";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const { setUserLogin } = useContext(LoginContext);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -54,6 +56,38 @@ const SignUp = () => {
     }
   };
 
+  const contiWithGoogle = async(credentialResponse) => {
+    console.log(credentialResponse);
+    const jwtDetail = jwtDecode(credentialResponse.credential);
+    console.log(jwtDetail);
+
+    const fetchSignUp = await fetch("http://localhost:5000/googleLogin", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: jwtDetail.name,
+        username: jwtDetail.email,
+        email: jwtDetail.email,
+        email_verified:jwtDetail.email_verified,
+        clientId:credentialResponse.clientId,
+        Photo:jwtDetail.picture
+      }),
+    });
+    const signUpData = await fetchSignUp.json();
+    if (signUpData.error) {
+      await notifyA(signUpData.error);
+    } else {
+      localStorage.setItem("jwt", signUpData.token);
+      localStorage.setItem("user", JSON.stringify(signUpData.user));
+      setUserLogin(true);
+      navigate("/");
+      await notifyB("Successfully Login");
+    }
+    
+  };
+
   return (
     <div className="signUp">
       <div className="container main-content">
@@ -63,6 +97,16 @@ const SignUp = () => {
             <p style={{ color: "black" }}>
               Sign up to see photos and videos from your friends
             </p>
+            <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              contiWithGoogle(credentialResponse);
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
+         
+          <p className="choice-line"><span className="line"></span><span>or</span><span className="line"></span></p> 
           </div>
           <div className="form-floating mb-2">
             <input
@@ -111,7 +155,7 @@ const SignUp = () => {
             <label htmlFor="email">Email</label>
           </div>
 
-          <div className="form-floating mb-2" >
+          <div className="form-floating mb-2">
             <input
               type="password"
               className="form-control input-signUp"
@@ -130,18 +174,9 @@ const SignUp = () => {
             Sign Up
           </button>
 
-          <GoogleLogin
-  onSuccess={credentialResponse => {
-    console.log(credentialResponse);
-    const jwtDetail=jwtDecode(credentialResponse.credential)
-    console.log(jwtDetail);
-  }}
-  onError={() => {
-    console.log('Login Failed');
-  }}
-/>
+          
           <div>
-            <p style={{ fontSize: "13.5px", margin: "5px 0" }}>
+            <p style={{ fontSize: "12px", margin: "5px 0" }}>
               By signing up, you agree to out Terms, privacy policy and cookies
               policy.
             </p>

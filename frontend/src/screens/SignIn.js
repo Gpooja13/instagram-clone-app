@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { LoginContext } from "../context/LoginContext";
 import logo_word from "../img/logo_word.png";
 import "../css/SignIn.css";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 const SignIn = () => {
   const { setUserLogin } = useContext(LoginContext);
@@ -11,10 +13,10 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const postSignIn = async (e) => {
-    const notifyA = (msg) => toast.error(msg);
-    const notifyB = (msg) => toast.success(msg);
+  const notifyA = (msg) => toast.error(msg);
+  const notifyB = (msg) => toast.success(msg);
 
+  const postSignIn = async (e) => {
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     e.preventDefault();
@@ -44,15 +46,56 @@ const SignIn = () => {
     }
   };
 
+  const contiWithGoogle = async (credentialResponse) => {
+    console.log(credentialResponse);
+    const jwtDetail = jwtDecode(credentialResponse.credential);
+    console.log(jwtDetail);
+
+    const fetchSignUp = await fetch("http://localhost:5000/googleLogin", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: jwtDetail.name,
+        username: jwtDetail.email,
+        email: jwtDetail.email,
+        email_verified: jwtDetail.email_verified,
+        clientId: credentialResponse.clientId,
+        Photo: jwtDetail.picture,
+      }),
+    });
+    const signUpData = await fetchSignUp.json();
+    if (signUpData.error) {
+      await notifyA(signUpData.error);
+    } else {
+      localStorage.setItem("jwt", signUpData.token);
+      localStorage.setItem("user", JSON.stringify(signUpData.user));
+      setUserLogin(true);
+      navigate("/");
+      await notifyB("Successfully Login");
+    }
+  };
+
   return (
     <div className="signIn">
       <div className="container main-content">
         <form onSubmit={postSignIn}>
           <div className="center">
             <img className="signIn-logo" src={logo_word} alt="Instagram" />
-            {/* <p style={{ color: "black" }}>
-              Sign in to see photos and videos from your friends
-            </p> */}
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                contiWithGoogle(credentialResponse);
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+            />
+            <p className="choice-line">
+              <span className="line"></span>
+              <span>or</span>
+              <span className="line"></span>
+            </p>
           </div>
           <div className="form-floating mb-2">
             <input
@@ -69,7 +112,7 @@ const SignIn = () => {
             />
             <label htmlFor="floatingInput">Email</label>
           </div>
-          <div className="form-floating" >
+          <div className="form-floating">
             <input
               type="password"
               className="form-control input-details"
@@ -84,7 +127,7 @@ const SignIn = () => {
             />
             <label htmlFor="floatingPassword">Password</label>
           </div>
-          <button type="submit" className="btn btn-primary btn-signIn my-2">
+          <button type="submit" className="btn btn-primary btn-signIn my-3">
             Sign In
           </button>
         </form>
@@ -98,7 +141,6 @@ const SignIn = () => {
         </span>
       </div>
     </div>
-
   );
 };
 

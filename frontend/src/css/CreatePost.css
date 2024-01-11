@@ -12,24 +12,26 @@
     background-color: white;
     color: #0095f6;
     font-weight: 500;
-    font-size: large;
+    font-size: medium;
 }
 
 .post-caption {
     width: 95%;
     border: none;
     outline: none;
-    margin: 10px;
+    margin-top: 2px;
 }
 
 .create-details {
     display: flex;
     align-items: center;
     padding: 10px 6px;
+    margin-top: 10px ;
 }
 
 .create-details>h5 {
     margin-left: 10px;
+    font-size: medium;
 }
 
 .create-details img {
@@ -46,6 +48,10 @@
 }
 
 .preview{
-    width: 100%;
-    margin: 4px;
+    width: 95%;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex
+   
 }

@@ -1,4 +1,96 @@
-.self-menu{
+.self-menu {
     display: flex;
     align-items: center;
+}
+
+.showComment {
+    width: 100vw;
+    min-height: 100vh;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+}
+
+.post-container {
+    display: flex;
+    background-color: white;
+    width: 80%;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    height: 500px;
+    padding: 0;
+}
+
+.post-pic {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.post-pic img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.details {
+    width: 100%;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.comment-section {
+    flex-grow: 4;
+    text-align: left;
+    margin-left: 5px;
+    margin-right: 10px;
+    padding: 10px 5px;
+    overflow: auto;
+}
+
+.close-comment {
+    position: fixed;
+    top: 2%;
+    right: 5%;
+    color: white;
+}
+
+.card-caption {
+    width: inherit;
+    padding: 14px 10px;
+    min-height: auto;
+}
+
+.card-like-content {
+    width: inherit;
+    padding: 6px;
+    line-height: 18px;
+}
+
+.card-like-content p {
+    margin: 0;
+}
+
+.delcomment-btn {
+    float: right;
+    color: rgb(179, 176, 176);
+}
+
+.delcomment-btn:hover {
+    color: rgb(58, 55, 55);
+}
+
+.userPost-name {
+    font-weight: 500;
+    margin: 0px 6px 0px 12px;
+}
+
+.name-link {
+    text-decoration: none;
+    color: black;
 }

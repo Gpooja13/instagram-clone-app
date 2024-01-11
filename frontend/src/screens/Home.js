@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Suggestion from "../components/Suggestion";
+import PostDetail from "../components/PostDetail";
 import("../css/Home.css");
 
 const Home = () => {
@@ -10,6 +12,8 @@ const Home = () => {
   const [comment, setComment] = useState([]);
   const [show, setShow] = useState(false);
   const [item, setItem] = useState([]);
+  let limit = 10;
+  let skip = 0;
 
   const navigate = useNavigate();
 
@@ -22,15 +26,33 @@ const Home = () => {
       navigate("/signIn");
     }
     // Fetching all posts
-    fetch("http://localhost:5000/allPosts", {
+    fetchPosts();
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const fetchPosts = () => {
+    fetch(`http://localhost:5000/allPosts?limit=${limit}&skip=${skip}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
     })
       .then((res) => res.json())
-      .then((result) => setData(result))
+      .then((result) => setData((data) => [...data, ...result]))
       .catch((err) => console.log(err));
-  }, []);
+  };
+
+  const handleScroll = () => {
+    if (
+      document.documentElement.clientHeight + window.pageYOffset >=
+      document.documentElement.scrollHeight
+    ) {
+      skip = skip + 10;
+      fetchPosts();
+    }
+  };
 
   const toggleComment = (posts) => {
     setItem(posts);
@@ -116,6 +138,7 @@ const Home = () => {
 
   return (
     <div>
+      <Suggestion />
       <div className="card">
         {data.map((posts) => {
           return (
@@ -128,8 +151,15 @@ const Home = () => {
                     alt="pic"
                   />
                 </div>
-                <h5>
-                  <Link to={`/profile/${posts.postedBy._id}`}>
+                <h5 className="user-name-heading">
+                  <Link
+                    to={
+                      posts.postedBy._id ===
+                      JSON.parse(localStorage.getItem("user"))._id
+                        ? "/profile"
+                        : `/profile/${posts.postedBy._id}`
+                    }
+                  >
                     {posts.postedBy.name}
                   </Link>
                 </h5>
@@ -144,7 +174,7 @@ const Home = () => {
                   JSON.parse(localStorage.getItem("user"))._id
                 ) ? (
                   <span
-                    class="material-symbols-outlined material-symbols-outlined-red"
+                    class="material-symbols-outlined material-symbols-outlined-red btn-margin"
                     onClick={() => {
                       unlikePost(posts._id);
                     }}
@@ -153,7 +183,7 @@ const Home = () => {
                   </span>
                 ) : (
                   <span
-                    class="material-symbols-outlined"
+                    class="material-symbols-outlined btn-margin "
                     onClick={() => {
                       likePost(posts._id);
                     }}
@@ -161,11 +191,27 @@ const Home = () => {
                     favorite
                   </span>
                 )}
+                <span
+                  class="material-symbols-outlined mx-2 btn-margin"
+                  onClick={() => {
+                    toggleComment(posts);
+                  }}
+                >
+                  mode_comment
+                </span>
 
-                <p>{posts.likes.length} Likes</p>
-                <p>{posts.body}</p>
+                <p className="text-bolder">{posts.likes.length} Likes</p>
+                <p>
+                  <span className="text-bolder">{posts.postedBy.name}</span>
+                  <span style={{ marginLeft: "8px" }}>{posts.body}</span>
+                </p>
                 <p
-                  style={{ fontWeight: "500", cursor: "pointer" }}
+                  style={{
+                    fontWeight: "500",
+                    cursor: "pointer",
+                    marginBottom: "0px",
+                    color: "#817b7b",
+                  }}
                   onClick={() => {
                     toggleComment(posts);
                   }}
@@ -175,7 +221,12 @@ const Home = () => {
               </div>
               {/* commment */}
               <div className="add-comment">
-                <span class="material-symbols-outlined">mood</span>
+                <span
+                  class="material-symbols-outlined"
+                  style={{ color: "#8d8d99", fontSize: "larger" }}
+                >
+                  mood
+                </span>
                 <input
                   placeholder="Add a Comment"
                   value={comment}
@@ -196,104 +247,7 @@ const Home = () => {
       </div>
 
       {/* show comment */}
-      {show && (
-        <div className="showComment">
-          <div className="post-container">
-            <div className="post-pic">
-              <img src={item.photo} />
-            </div>
-
-            <div className="details">
-              <div
-                className="card-header"
-                style={{ borderBottom: "1px solid #00000029" }}
-              >
-                <div className="card-pic">
-                  <img src={item.postedBy.Photo} alt="pic" />
-                </div>
-                <h5>{item.postedBy.name}</h5>
-              </div>
-
-              <div className="card-caption">
-                <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-                  {item.postedBy.name}
-                </span>
-                <span>{item.body}</span>
-              </div>
-
-              <div
-                className="comment-section"
-                style={{ borderBottom: "1px solid #00000029" }}
-              >
-                {item.comments.map((com) => {
-                  return (
-                    <p>
-                      <span style={{ fontWeight: "bolder" }}>
-                        {com.postedBy.name}{" "}
-                      </span>
-                      <span>{com.comment}</span>
-                    </p>
-                  );
-                })}
-              </div>
-
-              <div className="card-like-content">
-                {item.likes.includes(
-                  JSON.parse(localStorage.getItem("user"))._id
-                ) ? (
-                  <span
-                    class="material-symbols-outlined material-symbols-outlined-red"
-                    onClick={() => {
-                      unlikePost(item._id);
-                      toggleComment();
-                    }}
-                  >
-                    favorite
-                  </span>
-                ) : (
-                  <span
-                    class="material-symbols-outlined"
-                    onClick={() => {
-                      likePost(item._id);
-                      toggleComment();
-                    }}
-                  >
-                    favorite
-                  </span>
-                )}
-                <p>{item.likes.length} Likes</p>
-              </div>
-
-              <div className="add-comment">
-                <span class="material-symbols-outlined">mood</span>
-                <input
-                  placeholder="Add a Comment"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                />
-                <button
-                  className="btn-comment"
-                  onClick={() => {
-                    makeComment(comment, item._id);
-                    toggleComment();
-                  }}
-                >
-                  Post
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="close-comment">
-            <span
-              class="material-symbols-outlined"
-              style={{ fontSize: "xx-large" }}
-              onClick={() => toggleComment()}
-            >
-              close
-            </span>
-          </div>
-        </div>
-      )}
+      {show && <PostDetail item={item} toggleDetails={toggleComment} />}
     </div>
   );
 };

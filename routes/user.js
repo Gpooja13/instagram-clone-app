@@ -15,7 +15,9 @@ router.get("/user/:id", async (req, res) => {
 
     const posts = await POST.find({ postedBy: req.params.id })
       .populate("postedBy", "_id name Photo")
-      .populate("comments.postedBy", "_id name Photo");
+      .populate("comments.postedBy", "_id name Photo")
+      .populate("followers","_id username Photo")
+      .sort("-createdAt");
 
     res.status(200).json({ user, posts });
   } catch (error) {
@@ -85,6 +87,19 @@ router.put("/uploadProfilePic", requireLogin, (req, res) => {
   )
     .then((result) => res.json(result))
     .catch((err) => res.status(422).json(err));
+});
+
+router.get("/getsuggestion", requireLogin,  async (req, res) => {
+  try {
+    const userAll = await USER.find({$and:[{_id:{$not: {$in:req.user.following}}},{_id:{$ne:req.user._id}}]}).select("-password").limit(7);
+    if (!userAll) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(userAll);
+
+  } catch (err) {
+    return res.status(422).json(err);
+  }
 });
 
 module.exports = router;

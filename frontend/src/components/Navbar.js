@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { LoginContext } from "../context/LoginContext";
 import logo_word from "../img/logo_word.png";
 import "../css/Navbar.css";
@@ -14,51 +14,51 @@ const Navbar = (props) => {
           <nav className="main-menu">
             <ul className="menu-container">
               <li>
-                <Link className="" to="/">
+                <NavLink to="/">
                   <img className="logo" src={logo_word} alt="Instagram" />
-                </Link>
+                </NavLink>
               </li>
-              <li className="">
-                <Link to="/myfollowingpost">
+              <li>
+                <NavLink to="/myfollowingpost" className={({ isActive }) => (isActive ? 'selectedTab' : '')}>
                   <span class="material-symbols-outlined menu-icon">home</span>
                   <span className="menu-text"> Home</span>
-                </Link>
+                </NavLink>
               </li>
-              <li className="nav-item">
-                <Link to="/">
+              <li>
+                <NavLink to="/" className={({ isActive }) => (isActive ? 'selectedTab' : '')}>
                   <span class="material-symbols-outlined menu-icon">
                     explore
                   </span>
                   <span className="menu-text">Explore</span>
-                </Link>
+                </NavLink>
               </li>
-              <li className="nav-item">
-                <Link to="/createPost">
+              <li>
+                <NavLink to="/createPost" className={({ isActive }) => (isActive ? 'selectedTab' : '')}>
                   <span class="material-symbols-outlined menu-icon">
                     add_box
                   </span>
                   <span className="menu-text"> Create</span>
-                </Link>
+                </NavLink>
               </li>
-              <li className="nav-item">
-                <Link to="/profile">
+              <li>
+                <NavLink to="/profile" className={({ isActive }) => (isActive ? 'selectedTab' : '')}>
                   <span class="material-symbols-outlined menu-icon">
                     account_circle
                   </span>
                   <span className="menu-text">Profile</span>
-                </Link>
+                </NavLink>
               </li>
-              <li className="nav-item">
-                <Link onClick={() => {
-                      setModalOpen(true);
-                    }}>
-                  <span
-                    class="material-symbols-outlined menu-icon"
-                  >
+              <li>
+                <NavLink 
+                  onClick={() => {
+                    setModalOpen(true);
+                  }}
+                >
+                  <span class="material-symbols-outlined menu-icon">
                     logout
                   </span>
                   <span className="menu-text">Logout</span>
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </nav>
@@ -77,27 +77,33 @@ const Navbar = (props) => {
           <nav className="mob-main-menu">
             <ul className="mob-menu-container">
               <li className="">
-                <Link className="" to="/myfollowingpost">
+                <NavLink className="" to="/myfollowingpost">
                   <span class="material-symbols-outlined menu-icon">home</span>
-                </Link>
+                </NavLink>
               </li>
               <li className="">
-                <Link className="" aria-current="page" to="/">
-                  <span class="material-symbols-outlined menu-icon">explore</span>
-                </Link>
+                <NavLink className="" aria-current="page" to="/">
+                  <span class="material-symbols-outlined menu-icon">
+                    explore
+                  </span>
+                </NavLink>
               </li>
               <li className="">
-                <Link className="" to="/createPost">
-                  <span class="material-symbols-outlined menu-icon">add_box</span>
-                </Link>
+                <NavLink className="" to="/createPost">
+                  <span class="material-symbols-outlined menu-icon">
+                    add_box
+                  </span>
+                </NavLink>
               </li>
               <li className="">
-                <Link className="" to="/profile">
-                  <span class="material-symbols-outlined menu-icon">account_circle</span>
-                </Link>
+                <NavLink className="" to="/profile">
+                  <span class="material-symbols-outlined menu-icon">
+                    account_circle
+                  </span>
+                </NavLink>
               </li>
               <li className="">
-                <Link className="">
+                <NavLink className="">
                   <span
                     class="material-symbols-outlined menu-icon"
                     onClick={() => {
@@ -106,7 +112,7 @@ const Navbar = (props) => {
                   >
                     logout
                   </span>
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </nav>

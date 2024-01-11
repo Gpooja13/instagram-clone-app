@@ -50,8 +50,8 @@ router.post("/signIn", (req, res) => {
       .then((match) => {
         if (match) {
           const token = jwt.sign({ id: savedUser._id }, jwtSecret);
-          const { _id, name, email, username } = savedUser;
-          res.json({ token, user: { _id, name, email, username } });
+          const { _id, name, email, username,Photo } = savedUser;
+          res.json({ token, user: { _id, name, email, username ,Photo} });
           // return res.status(200).json({ message: "Signed in successfully" });
         } else {
           return res.status(422).json({ error: "Invalid password" });
@@ -65,19 +65,35 @@ router.post("/signIn", (req, res) => {
 });
 
 router.post("/googleLogin", (req, res) => {
-  const { email_verified, email, name, clientId, userName, Photo } = req.body;
+  const { email_verified, email, name, clientId, username, Photo } = req.body;
   if (email_verified) {
-    USER.findOne({ email: email }).then((savedUser) => {
-      if (!savedUser) {
-        return res.status(422).json({ error: "Invalid email" });
-      }
-      
-            const token = jwt.sign({ id: savedUser._id }, jwtSecret);
-            const { _id, name, email, username } = savedUser;
+    USER.findOne({ email: email })
+      .then((savedUser) => {
+        if (savedUser) {
+          const token = jwt.sign({ id: savedUser._id }, jwtSecret);
+          const { _id, name, email, username } = savedUser;
+          res.json({ token, user: { _id, name, email, username } });
+          console.log(savedUser);
+        } else {
+          const password = email + clientId;
+          const newUserName = username.split("@")[0];
+          const user = new USER({
+            name,
+            username: newUserName,
+            email,
+            password: password,
+            Photo,
+          });
+          user.save().then((user) => {
+            let userId = user._id.toString();
+            const token = jwt.sign({ id: userId }, jwtSecret);
+            const { _id, name, email, username } = user;
             res.json({ token, user: { _id, name, email, username } });
-            // return res.status(200).json({ message: "Signed in successfully" });
-      console.log(savedUser);
-    });
+            console.log({ token, user: { _id, name, email, username } });
+          });
+        }
+      })
+      .catch((error) => console.log(error));
   }
 });
 

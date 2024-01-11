@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
   },
   Photo: {
     type: String,
+    default:"https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
   },
   followers: [{ type: ObjectId, ref: "USER" }],
   following: [{ type: ObjectId, ref: "USER" }],

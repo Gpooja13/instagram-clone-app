@@ -5,9 +5,13 @@ const requireLogin = require("../middleswares/requireLogin");
 const POST = mongoose.model("POST");
 
 router.get("/allPosts", requireLogin, (req, res) => {
+  let limit = req.query.limit;
+  let skip = req.query.skip;
   POST.find()
     .populate("postedBy", "_id name Photo")
-    .populate("comments.postedBy", "_id name")
+    .populate("comments.postedBy", "_id name Photo")
+    .skip(parseInt(skip))
+    .limit(parseInt(limit))
     .sort("-createdAt")
     .then((posts) => res.json(posts))
     .catch((err) => {
@@ -88,7 +92,7 @@ router.put("/comment", requireLogin, (req, res) => {
       new: true,
     }
   )
-    .populate("comments.postedBy", "_id name")
+    .populate("comments.postedBy", "_id name Photo")
     .exec()
     .then((result) => {
       res.json(result);
@@ -97,6 +101,20 @@ router.put("/comment", requireLogin, (req, res) => {
       return res.status(422).json({ error: err });
     });
 });
+
+router.put("/uncomment", requireLogin, async (req, res) => {
+  try {
+    const result = await POST.updateOne(
+      { _id: req.body.id },
+      { $pull: { comments: { _id: req.body.cid } } }
+    );
+    
+    res.json(result);
+  } catch (err) {
+    return res.status(422).json({ error: err });
+  }
+});
+
 
 router.delete("/deletePost/:postId", requireLogin, (req, res) => {
   POST.findOne({ _id: req.params.postId })

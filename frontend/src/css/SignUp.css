@@ -45,6 +45,19 @@
     flex-direction: column;
 }
 
+.line{
+    background-color: #b8b8c3b3;
+    width: 135px;
+    height: 1px;
+    margin: 5px 15px 
+}
+
+.choice-line{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
 
 .form-floating>.form-control,
 .form-floating>.form-control-plaintext {
@@ -55,7 +68,7 @@
 .form-floating>.form-control-plaintext,
 .form-floating>.form-select {
   height: calc(2.5rem + 2px) !important;
-  min-height: 52px;
+  min-height: 50px;
   line-height: 1 !important;
   font-size: 16px;
 }

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../css/CreatePost.css";
 
 const CreatePost = () => {
+  var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
   const hiddenFileInput = useRef(null);
   const navigate = useNavigate();
   const [body, setBody] = useState("");
@@ -57,6 +58,7 @@ const CreatePost = () => {
           if (res.error) {
             notifyA(res.error);
           } else {
+            console.log(res)
             notifyB("Successfully posted");
             navigate("/");
           }
@@ -68,13 +70,13 @@ const CreatePost = () => {
   return (
     <div className="createPost">
       <div className="create-header">
-        <h4 style={{ margin: "3px auto" }}>Create new post</h4>
+        <h3 style={{ margin: "3px auto",fontSize:"large" }}>Create new post</h3>
         <button id="btn-createPost" onClick={postDetails}>
           Share
         </button>
       </div>
       <hr style={{ margin: "5px auto" }} />
-      <div>
+      <div style={{width:"100%"}}>
         <img
           className="preview"
           id="output"
@@ -96,9 +98,9 @@ const CreatePost = () => {
       <div>
         <div className="create-details">
           <div>
-            <img src="RM.jfif" alt="pic" />
+            <img src={(JSON.parse(localStorage.getItem("user")).Photo?JSON.parse(localStorage.getItem("user")).Photo:picLink)} alt="user-profile-pic" />
           </div>
-          <h5>Ramesh</h5>
+          <h5>{JSON.parse(localStorage.getItem("user")).username}</h5>
         </div>
         <div className="center">
           <textarea

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PostDetail from "../components/PostDetail";
 import ProfilePic from "../components/ProfilePic";
+import List from "../components/List";
 import "../css/Profile.css";
 
 const Profile = () => {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
-
+const [showList, setShowList] = useState(false)
   const [pic, setPic] = useState([]);
   const [show, setShow] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -18,6 +19,14 @@ const Profile = () => {
     } else {
       setShow(true);
       setPosts(posts);
+    }
+  };
+
+  const toggleList = () => {
+    if (showList) {
+      setShowList(false);
+    } else {
+      setShowList(true);
     }
   };
 
@@ -52,8 +61,9 @@ const Profile = () => {
 
   // fetchUserDetail();
   useEffect(() => {
-   fetchUserDetail();
-  }, []);
+    fetchUserDetail();
+    console.log(show);
+  }, [show]);
 
   return (
     <div className="profile">
@@ -69,12 +79,39 @@ const Profile = () => {
         {/* details */}
         <div className="profile-data">
           <div>
-            <h1>{JSON.parse(localStorage.getItem("user")).name}</h1>
+            <h1
+              className="username-heading"
+              style={{
+                fontWeight: "500",
+                fontSize: "xx-large",
+                marginBottom: "20px",
+              }}
+            >
+              {JSON.parse(localStorage.getItem("user")).username}
+            </h1>
           </div>
           <div className="profile-info">
-            <p>{pic ? pic.length : "0"} Posts</p>
-            <p>{user.followers ? user.followers.length : "0"} Followers</p>
-            <p>{user.following ? user.following.length : "0"} Following</p>
+            <p>
+              <span className="text-bolder">{pic ? pic.length : "0"}</span>{" "}
+              Posts
+            </p>
+            <p style={{cursor:"pointer"}} onClick={()=>toggleList()} >
+              <span className="text-bolder">
+                {user.followers ? user.followers.length : "0"}
+              </span>{" "}
+              Followers
+            </p>
+            <p style={{cursor:"pointer"}} onClick={()=>toggleList()}>
+              <span className="text-bolder">
+                {user.following ? user.following.length : "0"}
+              </span>{" "}
+              Following
+            </p>
+          </div>
+          <div>
+            <p className="text-bolder">
+              {JSON.parse(localStorage.getItem("user")).name}
+            </p>
           </div>
         </div>
       </div>
@@ -97,6 +134,7 @@ const Profile = () => {
       </div>
       {show && <PostDetail item={posts} toggleDetails={toggleDetails} />}
       {changePic && <ProfilePic changeProfile={changeProfile} />}
+      {showList && <List toggleList={toggleList}/>}
     </div>
   );
 };
