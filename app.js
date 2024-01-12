@@ -14,8 +14,7 @@ app.use(require("./routes/createPost"));
 app.use(require("./routes/auth"));
 app.use(require("./routes/user"));
 
-const link = process.env.MONGODB_STRING;
-mongoose.connect(link);
+mongoose.connect(process.env.MONGODB_STRING);
 
 mongoose.connection.on("connected", () => {
   console.log("Successfully Connected to mongodb");
