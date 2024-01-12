@@ -4,7 +4,7 @@ const USER = mongoose.model("USER");
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
-  jwtSecret = process.env.JWT_SECRET||'asdfghjklz';
+  jwtSecret = process.env.JWT_SECRET;
   if (!authorization) {
     return res.status(401).json({ error: "Login first" });
   } else {

@@ -14,7 +14,7 @@ app.use(require("./routes/createPost"));
 app.use(require("./routes/auth"));
 app.use(require("./routes/user"));
 
-const link = process.env.MONGODB_STRING||'mongodb+srv://gpooja13:OnMGKLLko0Zsohy9@cluster0.2srtyqa.mongodb.net/?retryWrites=true&w=majority';
+const link = process.env.MONGODB_STRING;
 mongoose.connect(link);
 
 mongoose.connection.on("connected", () => {

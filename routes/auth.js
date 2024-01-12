@@ -5,7 +5,7 @@ const USER = mongoose.model("USER");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-jwtSecret = process.env.JWT_SECRET||'asdfghjklz';
+jwtSecret = process.env.JWT_SECRET;
 
 router.post("/signUp", (req, res) => {
   const { name, username, email, password } = req.body;
