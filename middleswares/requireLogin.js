@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const { jwtSecret } = require("../keys");
 const mongoose = require("mongoose");
 const USER = mongoose.model("USER");
 
@@ -10,7 +9,7 @@ module.exports = (req, res, next) => {
   } else {
    
     const token = authorization.replace("Bearer ", "");
-    jwt.verify(token, jwtSecret, (error, payload) => {
+    jwt.verify(token, process.env.JWT_SECRET, (error, payload) => {
         console.log(payload)
       if (error) {
         return res.status(401).json({ error: "Login first" });

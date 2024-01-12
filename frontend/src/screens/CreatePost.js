@@ -45,7 +45,7 @@ const CreatePost = () => {
 
   useEffect(() => {
     if (url) {
-      fetch("http://localhost:5000/createPost", {
+      fetch("/createPost", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const CreatePost = () => {
           } else {
             console.log(res)
             notifyB("Successfully posted");
-            navigate("/");
+            navigate("/explore");
           }
         })
         .catch((err) => console.log(err));

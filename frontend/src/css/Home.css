@@ -25,7 +25,7 @@
   padding: 8px;
   width: inherit;
   background-color: white;
-
+  border-bottom:none
 }
 
 .card-pic img {

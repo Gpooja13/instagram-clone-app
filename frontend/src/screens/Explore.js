@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Suggestion from "../components/Suggestion";
+import PostDetail from "../components/PostDetail";
 import("../css/Home.css");
 
-const MyFollowingPost = () => {
+const Explore = () => {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
   const [data, setData] = useState([]);
   const [comment, setComment] = useState([]);
   const [show, setShow] = useState(false);
   const [item, setItem] = useState([]);
+  let limit = 10;
+  let skip = 0;
 
   const navigate = useNavigate();
 
@@ -22,15 +26,33 @@ const MyFollowingPost = () => {
       navigate("/signIn");
     }
     // Fetching all posts
-    fetch("http://localhost:5000/myfollowingpost", {
+    fetchPosts();
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const fetchPosts = () => {
+    fetch(`/allPosts?limit=${limit}&skip=${skip}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
     })
       .then((res) => res.json())
-      .then((result) => setData(result))
+      .then((result) => setData((data) => [...data, ...result]))
       .catch((err) => console.log(err));
-  }, []);
+  };
+
+  const handleScroll = () => {
+    if (
+      document.documentElement.clientHeight + window.pageYOffset >=
+      document.documentElement.scrollHeight
+    ) {
+      skip = skip + 10;
+      fetchPosts();
+    }
+  };
 
   const toggleComment = (posts) => {
     setItem(posts);
@@ -42,7 +64,7 @@ const MyFollowingPost = () => {
   };
 
   const likePost = (id) => {
-    fetch("http://localhost:5000/like", {
+    fetch("/like", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +87,7 @@ const MyFollowingPost = () => {
   };
 
   const unlikePost = (id) => {
-    fetch("http://localhost:5000/unlike", {
+    fetch("/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +110,7 @@ const MyFollowingPost = () => {
   };
 
   const makeComment = (text, id) => {
-    fetch("http://localhost:5000/comment", {
+    fetch("/comment", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -116,6 +138,7 @@ const MyFollowingPost = () => {
 
   return (
     <div>
+      <Suggestion />
       <div className="card">
         {data.map((posts) => {
           return (
@@ -129,7 +152,14 @@ const MyFollowingPost = () => {
                   />
                 </div>
                 <h5 className="user-name-heading">
-                  <Link to={`/profile/${posts.postedBy._id}`}>
+                  <Link
+                    to={
+                      posts.postedBy._id ===
+                      JSON.parse(localStorage.getItem("user"))._id
+                        ? "/profile"
+                        : `/profile/${posts.postedBy._id}`
+                    }
+                  >
                     {posts.postedBy.name}
                   </Link>
                 </h5>
@@ -153,7 +183,7 @@ const MyFollowingPost = () => {
                   </span>
                 ) : (
                   <span
-                    class="material-symbols-outlined btn-margin"
+                    class="material-symbols-outlined btn-margin "
                     onClick={() => {
                       likePost(posts._id);
                     }}
@@ -180,7 +210,7 @@ const MyFollowingPost = () => {
                     fontWeight: "500",
                     cursor: "pointer",
                     marginBottom: "0px",
-                    color:"#817b7b"
+                    color: "#817b7b",
                   }}
                   onClick={() => {
                     toggleComment(posts);
@@ -191,7 +221,12 @@ const MyFollowingPost = () => {
               </div>
               {/* commment */}
               <div className="add-comment">
-              <span class="material-symbols-outlined" style={{color:"#8d8d99",fontSize:"larger"}}>mood</span>
+                <span
+                  class="material-symbols-outlined"
+                  style={{ color: "#8d8d99", fontSize: "larger" }}
+                >
+                  mood
+                </span>
                 <input
                   placeholder="Add a Comment"
                   value={comment}
@@ -212,106 +247,9 @@ const MyFollowingPost = () => {
       </div>
 
       {/* show comment */}
-      {show && (
-        <div className="showComment">
-          <div className="container">
-            <div className="post-pic">
-              <img src={item.photo} />
-            </div>
-
-            <div className="details">
-              <div
-                className="card-header"
-                style={{ borderBottom: "1px solid #00000029" }}
-              >
-                <div className="card-pic">
-                  <img src={item.postedBy.Photo} alt="pic" />
-                </div>
-                <h5>{item.postedBy.name}</h5>
-              </div>
-
-              <div className="card-caption">
-                <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-                  {item.postedBy.name}
-                </span>
-                <span>{item.body}</span>
-              </div>
-
-              <div
-                className="comment-section"
-                style={{ borderBottom: "1px solid #00000029" }}
-              >
-                {item.comments.map((com) => {
-                  return (
-                    <p>
-                      <span style={{ fontWeight: "bolder" }}>
-                        {com.postedBy.name}{" "}
-                      </span>
-                      <span>{com.comment}</span>
-                    </p>
-                  );
-                })}
-              </div>
-
-              <div className="card-like-content">
-                {item.likes.includes(
-                  JSON.parse(localStorage.getItem("user"))._id
-                ) ? (
-                  <span
-                    class="material-symbols-outlined material-symbols-outlined-red"
-                    onClick={() => {
-                      unlikePost(item._id);
-                      toggleComment();
-                    }}
-                  >
-                    favorite
-                  </span>
-                ) : (
-                  <span
-                    class="material-symbols-outlined"
-                    onClick={() => {
-                      likePost(item._id);
-                      toggleComment();
-                    }}
-                  >
-                    favorite
-                  </span>
-                )}
-                <p>{item.likes.length} Likes</p>
-              </div>
-
-              <div className="add-comment">
-                <span class="material-symbols-outlined">mood</span>
-                <input
-                  placeholder="Add a Comment"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                />
-                <button
-                  className="btn-comment"
-                  onClick={() => {
-                    makeComment(comment, item._id);
-                    toggleComment();
-                  }}
-                >
-                  Post
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="close-comment">
-            <span
-              class="material-symbols-outlined"
-              style={{ fontSize: "xx-large" }}
-              onClick={() => toggleComment()}
-            >
-              close
-            </span>
-          </div>
-        </div>
-      )}
+      {show && <PostDetail item={item} toggleDetails={toggleComment} />}
     </div>
   );
 };
 
-export default MyFollowingPost;
+export default Explore;

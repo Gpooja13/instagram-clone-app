@@ -43,14 +43,18 @@ margin: 10px auto; */
     height: 270px;
     object-fit: cover;
     margin: 5px;
-  
+
 }
 
 .text-bolder {
     font-weight: 500;
 }
 
-
+.username-heading {
+    font-weight: 500;
+    font-size: xx-large;
+    /* margin-bottom: 20px; */
+}
 
 
 
@@ -91,7 +95,7 @@ margin: 10px auto; */
 
     .gallery {
         margin-left: 15px;
-        width: 92vw 
+        width: 92vw
     }
 
     .gallery img {

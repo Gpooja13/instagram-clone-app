@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const USER = mongoose.model("USER");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { jwtSecret } = require("../keys");
 
 router.post("/signUp", (req, res) => {
   const { name, username, email, password } = req.body;
@@ -49,7 +48,7 @@ router.post("/signIn", (req, res) => {
       .compare(password, savedUser.password)
       .then((match) => {
         if (match) {
-          const token = jwt.sign({ id: savedUser._id }, jwtSecret);
+          const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
           const { _id, name, email, username,Photo } = savedUser;
           res.json({ token, user: { _id, name, email, username ,Photo} });
           // return res.status(200).json({ message: "Signed in successfully" });
@@ -70,7 +69,7 @@ router.post("/googleLogin", (req, res) => {
     USER.findOne({ email: email })
       .then((savedUser) => {
         if (savedUser) {
-          const token = jwt.sign({ id: savedUser._id }, jwtSecret);
+          const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
           const { _id, name, email, username } = savedUser;
           res.json({ token, user: { _id, name, email, username } });
           console.log(savedUser);

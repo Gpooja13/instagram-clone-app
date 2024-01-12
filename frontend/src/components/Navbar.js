@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect,useState } from "react";
 import { NavLink } from "react-router-dom";
 import { LoginContext } from "../context/LoginContext";
 import logo_word from "../img/logo_word.png";
@@ -6,6 +6,17 @@ import "../css/Navbar.css";
 
 const Navbar = (props) => {
   const { setModalOpen } = useContext(LoginContext);
+  const [modal, setModal] = useState(false);
+
+  const toggleScroll = () => {
+    setModal(props.modalOpen);
+    if (modal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  };
+
   const loginStatus = () => {
     const token = localStorage.getItem("jwt");
     if (token || props.login) {
@@ -19,13 +30,19 @@ const Navbar = (props) => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/myfollowingpost" className={({ isActive }) => (isActive ? 'selectedTab' : '')}>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) => (isActive ? "selectedTab" : "")}
+                >
                   <span class="material-symbols-outlined menu-icon">home</span>
                   <span className="menu-text"> Home</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/" className={({ isActive }) => (isActive ? 'selectedTab' : '')}>
+                <NavLink
+                  to="/explore"
+                  className={({ isActive }) => (isActive ? "selectedTab" : "")}
+                >
                   <span class="material-symbols-outlined menu-icon">
                     explore
                   </span>
@@ -33,7 +50,10 @@ const Navbar = (props) => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/createPost" className={({ isActive }) => (isActive ? 'selectedTab' : '')}>
+                <NavLink
+                  to="/createPost"
+                  className={({ isActive }) => (isActive ? "selectedTab" : "")}
+                >
                   <span class="material-symbols-outlined menu-icon">
                     add_box
                   </span>
@@ -41,7 +61,10 @@ const Navbar = (props) => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/profile" className={({ isActive }) => (isActive ? 'selectedTab' : '')}>
+                <NavLink
+                  to="/profile"
+                  className={({ isActive }) => (isActive ? "selectedTab" : "")}
+                >
                   <span class="material-symbols-outlined menu-icon">
                     account_circle
                   </span>
@@ -49,7 +72,7 @@ const Navbar = (props) => {
                 </NavLink>
               </li>
               <li>
-                <NavLink 
+                <NavLink
                   onClick={() => {
                     setModalOpen(true);
                   }}
@@ -122,6 +145,10 @@ const Navbar = (props) => {
       return [<></>];
     }
   };
+
+  useEffect(() => {
+    toggleScroll();
+  });
 
   return (
     <div className="main-navbar">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Suggestion from "../components/Suggestion";
+import Suggestion from '../components/Suggestion';
 import PostDetail from "../components/PostDetail";
 import("../css/Home.css");
 
@@ -12,8 +12,6 @@ const Home = () => {
   const [comment, setComment] = useState([]);
   const [show, setShow] = useState(false);
   const [item, setItem] = useState([]);
-  let limit = 10;
-  let skip = 0;
 
   const navigate = useNavigate();
 
@@ -26,33 +24,15 @@ const Home = () => {
       navigate("/signIn");
     }
     // Fetching all posts
-    fetchPosts();
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const fetchPosts = () => {
-    fetch(`http://localhost:5000/allPosts?limit=${limit}&skip=${skip}`, {
+    fetch("/myfollowingpost", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
     })
       .then((res) => res.json())
-      .then((result) => setData((data) => [...data, ...result]))
+      .then((result) => setData(result))
       .catch((err) => console.log(err));
-  };
-
-  const handleScroll = () => {
-    if (
-      document.documentElement.clientHeight + window.pageYOffset >=
-      document.documentElement.scrollHeight
-    ) {
-      skip = skip + 10;
-      fetchPosts();
-    }
-  };
+  }, []);
 
   const toggleComment = (posts) => {
     setItem(posts);
@@ -64,7 +44,7 @@ const Home = () => {
   };
 
   const likePost = (id) => {
-    fetch("http://localhost:5000/like", {
+    fetch("/like", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -87,7 +67,7 @@ const Home = () => {
   };
 
   const unlikePost = (id) => {
-    fetch("http://localhost:5000/unlike", {
+    fetch("/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +90,7 @@ const Home = () => {
   };
 
   const makeComment = (text, id) => {
-    fetch("http://localhost:5000/comment", {
+    fetch("/comment", {
       method: "put",
       headers: {
         "Content-Type": "application/json",

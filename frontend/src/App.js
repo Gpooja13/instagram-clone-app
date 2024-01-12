@@ -12,8 +12,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, { createContext, useState } from "react";
 import { LoginContext } from "./context/LoginContext";
-import UserProfile from "./components/UserProfile";
-import MyFollowingPost from "./screens/MyFollowingPost";
+import UserProfile from "./screens/UserProfile";
+import Explore from "./screens/Explore";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
     <BrowserRouter>
     <GoogleOAuthProvider clientId="715281373099-rnp1d2vte3fr364qsui8fou90lu598t5.apps.googleusercontent.com">
       <LoginContext.Provider value={{ setUserLogin, setModalOpen }}>
-        <Navbar login={userLogin} />
+        <Navbar login={userLogin} modalOpen={modalOpen} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signIn" element={<SignIn />} />
@@ -31,7 +31,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/createPost" element={<CreatePost />} />
           <Route path="/profile/:userid" element={<UserProfile />} />
-          <Route path="/myfollowingpost" element={<MyFollowingPost />} />
+          <Route path="/explore" element={<Explore />} />
           <Route path="*" element={<Error />} />
         </Routes>
         <ToastContainer />

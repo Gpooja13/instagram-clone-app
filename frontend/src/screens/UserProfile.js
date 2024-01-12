@@ -1,30 +1,41 @@
 import React, { useState, useEffect } from "react";
-import PostDetail from "./PostDetail";
+import PostDetail from "../components/PostDetail";
+import List from "../components/List";
 import { useParams } from "react-router-dom";
 import "../css/UserProfile.css";
 
 const UserProfile = () => {
-  var picLink="https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
+  var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
+  const [listHeading, setlistHeading] = useState("");
+  const [showList, setShowList] = useState(false);
+  const [followData, setfollowData] = useState([]);
   const { userid } = useParams();
   const [isFollow, setIsFollow] = useState(false);
   const [user, setUser] = useState("");
   const [posts, setPosts] = useState([]);
-  const [refresh, setRefresh] = useState("")
+  const [refresh, setRefresh] = useState("");
+  const [pic, setPic] = useState([]);
+  const [show, setShow] = useState(false);
 
-    const [pic, setPic] = useState([]);
-    const [show, setShow] = useState(false);
+  const toggleDetails = (posts) => {
+    if (show) {
+      setShow(false);
+    } else {
+      setShow(true);
+      setPosts(posts);
+    }
+  };
 
-    const toggleDetails = (posts) => {
-      if (show) {
-        setShow(false);
-      } else {
-        setShow(true);
-        setPosts(posts);
-      }
-    };
+  const toggleList = () => {
+    if (showList) {
+      setShowList(false);
+    } else {
+      setShowList(true);
+    }
+  };
 
   const followUser = (userId) => {
-    fetch("http://localhost:5000/follow", {
+    fetch("/follow", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -35,13 +46,13 @@ const UserProfile = () => {
       .then((res) => res.json())
       .then((data) => {
         setIsFollow(true);
-        setRefresh(false)
+        setRefresh(false);
       });
   };
 
   const unfollowUser = (userId) => {
     console.log(userId);
-    fetch("http://localhost:5000/unfollow", {
+    fetch("/unfollow", {
       method: "put",
       body: JSON.stringify({ followId: userId }),
       headers: {
@@ -53,12 +64,12 @@ const UserProfile = () => {
       .then((data) => {
         console.log(data);
         setIsFollow(false);
-        setRefresh(true)
+        setRefresh(true);
       });
   };
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/user/${userid}`, {
+  const fetchUserDetail=()=>{
+    fetch(`/user/${userid}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -83,39 +94,58 @@ const UserProfile = () => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [refresh]);
+    }
+
+  useEffect(() => {
+   fetchUserDetail();
+  }, [refresh,show]);
 
   return (
-
     <div className="profile">
       {/* Profile frame */}
       <div className="profile-frame">
         <div className="profile-pic">
-          <img
-            src={user.Photo ? user.Photo : picLink}
-            alt="pic"
-          />
+          <img src={user.Photo ? user.Photo : picLink} alt="pic" />
         </div>
         {/* details */}
         <div className="profile-data">
           <div className="user-header">
-            <h1>{user.name}</h1>
-            <button className="follow-btn "
-            onClick={() => {
-              if (isFollow) {
-                unfollowUser(user._id);
-              } else {
-                followUser(user._id);
-              }
-            }}
-          >
-            {isFollow ? "Unfollow" : "Follow"}
-          </button>
+            <h1 className="username-heading">{user.name}</h1>
+            <button
+              className="follow-btn "
+              onClick={() => {
+                if (isFollow) {
+                  unfollowUser(user._id);
+                } else {
+                  followUser(user._id);
+                }
+              }}
+            >
+              {isFollow ? "Unfollow" : "Follow"}
+            </button>
           </div>
           <div className="profile-info">
             <p>{posts ? posts.length : "0"} Posts</p>
-            <p>{user.followers ? user.followers.length : "0"} Followers</p>
-            <p>{user.following ? user.following.length : "0"} Following</p>
+            <p
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                setfollowData(user.followers);
+                setlistHeading("Followers");
+                toggleList();
+              }}
+            >
+              {user.followers ? user.followers.length : "0"} Followers
+            </p>
+            <p
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                setfollowData(user.following);
+                setlistHeading("Following");
+                toggleList();
+              }}
+            >
+              {user.following ? user.following.length : "0"} Following
+            </p>
           </div>
         </div>
       </div>
@@ -137,6 +167,13 @@ const UserProfile = () => {
         </div>
       </div>
       {show && <PostDetail item={posts} toggleDetails={toggleDetails} />}
+      {showList && (
+        <List
+          toggleList={toggleList}
+          followData={followData}
+          listHeading={listHeading}
+        />
+      )}
     </div>
   );
 };

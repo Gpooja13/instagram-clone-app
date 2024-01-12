@@ -6,7 +6,9 @@ import "../css/Profile.css";
 
 const Profile = () => {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
-const [showList, setShowList] = useState(false)
+  const [listHeading, setlistHeading] = useState("");
+  const [showList, setShowList] = useState(false);
+  const [followData, setfollowData] = useState([]);
   const [pic, setPic] = useState([]);
   const [show, setShow] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -40,7 +42,7 @@ const [showList, setShowList] = useState(false)
 
   const fetchUserDetail = () => {
     fetch(
-      `http://localhost:5000/user/${
+      `/user/${
         JSON.parse(localStorage.getItem("user"))._id
       }`,
       {
@@ -62,7 +64,6 @@ const [showList, setShowList] = useState(false)
   // fetchUserDetail();
   useEffect(() => {
     fetchUserDetail();
-    console.log(show);
   }, [show]);
 
   return (
@@ -81,11 +82,6 @@ const [showList, setShowList] = useState(false)
           <div>
             <h1
               className="username-heading"
-              style={{
-                fontWeight: "500",
-                fontSize: "xx-large",
-                marginBottom: "20px",
-              }}
             >
               {JSON.parse(localStorage.getItem("user")).username}
             </h1>
@@ -95,13 +91,27 @@ const [showList, setShowList] = useState(false)
               <span className="text-bolder">{pic ? pic.length : "0"}</span>{" "}
               Posts
             </p>
-            <p style={{cursor:"pointer"}} onClick={()=>toggleList()} >
+            <p
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                setfollowData(user.followers);
+                setlistHeading("Followers");
+                toggleList();
+              }}
+            >
               <span className="text-bolder">
                 {user.followers ? user.followers.length : "0"}
               </span>{" "}
               Followers
             </p>
-            <p style={{cursor:"pointer"}} onClick={()=>toggleList()}>
+            <p
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                setfollowData(user.following);
+                setlistHeading("Following");
+                toggleList();
+              }}
+            >
               <span className="text-bolder">
                 {user.following ? user.following.length : "0"}
               </span>{" "}
@@ -134,7 +144,13 @@ const [showList, setShowList] = useState(false)
       </div>
       {show && <PostDetail item={posts} toggleDetails={toggleDetails} />}
       {changePic && <ProfilePic changeProfile={changeProfile} />}
-      {showList && <List toggleList={toggleList}/>}
+      {showList && (
+        <List
+          toggleList={toggleList}
+          followData={followData}
+          listHeading={listHeading}
+        />
+      )}
     </div>
   );
 };
