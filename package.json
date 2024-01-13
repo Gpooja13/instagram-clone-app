@@ -1,6 +1,5 @@
 {
   "name": "backend",
-  "homepage": ".",
   "version": "1.0.0",
   "description": "Insta-Clone-App",
   "main": "index.js",
