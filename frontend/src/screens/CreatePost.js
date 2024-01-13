@@ -60,7 +60,7 @@ const CreatePost = () => {
           } else {
            
             notifyB("Successfully posted");
-            navigate("long-lime-penguin-wear.cyclic.app/explore");
+            navigate("/explore");
           }
         })
         .catch((err) => console.log(err));

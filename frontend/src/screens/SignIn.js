@@ -41,7 +41,7 @@ const SignIn = () => {
       localStorage.setItem("jwt", signUpData.token);
       localStorage.setItem("user", JSON.stringify(signUpData.user));
       setUserLogin(true);
-      navigate("long-lime-penguin-wear.cyclic.app/");
+      navigate("/");
       await notifyB("Successfully Login");
     }
   };
@@ -71,7 +71,7 @@ const SignIn = () => {
       localStorage.setItem("jwt", signUpData.token);
       localStorage.setItem("user", JSON.stringify(signUpData.user));
       setUserLogin(true);
-      navigate("long-lime-penguin-wear.cyclic.app/");
+      navigate("/");
       await notifyB("Successfully Login");
     }
   };

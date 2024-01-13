@@ -52,7 +52,7 @@ const SignUp = () => {
       await notifyA(signUpData.error);
     } else {
       await notifyB(signUpData.message);
-      navigate("long-lime-penguin-wear.cyclic.app/signIn");
+      navigate("/signIn");
     }
   };
 
@@ -80,7 +80,7 @@ const SignUp = () => {
       localStorage.setItem("jwt", signUpData.token);
       localStorage.setItem("user", JSON.stringify(signUpData.user));
       setUserLogin(true);
-      navigate("long-lime-penguin-wear.cyclic.app/");
+      navigate("/");
       await notifyB("Successfully Login");
     }
     

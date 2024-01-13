@@ -25,7 +25,7 @@ const Modal = () => {
               onClick={() => {
                 setModalOpen(false);
                 localStorage.clear();
-                navigate("long-lime-penguin-wear.cyclic.app/signIn");
+                navigate("/signIn");
                 window.location.reload();
               }}
             >

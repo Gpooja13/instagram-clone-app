@@ -26,35 +26,35 @@ function App() {
           <Navbar login={userLogin} modalOpen={modalOpen} />
           <Routes>
             <Route
-              path="long-lime-penguin-wear.cyclic.app/"
+              path="/"
               element={<Home />}
             />
             <Route
-              path="long-lime-penguin-wear.cyclic.app/signIn"
+              path="/signIn"
               element={<SignIn />}
             />
             <Route
-              path="long-lime-penguin-wear.cyclic.app/signUp"
+              path="/signUp"
               element={<SignUp />}
             />
             <Route
-              path="long-lime-penguin-wear.cyclic.app/profile"
+              path="/profile"
               element={<Profile />}
             />
             <Route
-              path="long-lime-penguin-wear.cyclic.app/createPost"
+              path="/createPost"
               element={<CreatePost />}
             />
             <Route
-              path="long-lime-penguin-wear.cyclic.app/profile/:userid"
+              path="/profile/:userid"
               element={<UserProfile />}
             />
             <Route
-              path="long-lime-penguin-wear.cyclic.app/explore"
+              path="/explore"
               element={<Explore />}
             />
             <Route
-              path="long-lime-penguin-wear.cyclic.app/*"
+              path="/*"
               element={<Error />}
             />
           </Routes>
