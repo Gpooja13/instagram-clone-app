@@ -20,7 +20,7 @@ function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [userLogin, setUserLogin] = useState(false);
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/long-lime-penguin-wear.cyclic.app">
       <GoogleOAuthProvider clientId="715281373099-rnp1d2vte3fr364qsui8fou90lu598t5.apps.googleusercontent.com">
         <LoginContext.Provider value={{ setUserLogin, setModalOpen }}>
           <Navbar login={userLogin} modalOpen={modalOpen} />
