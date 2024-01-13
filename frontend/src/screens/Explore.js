@@ -23,7 +23,7 @@ const Explore = () => {
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (!token) {
-      navigate("/signIn");
+      navigate("long-lime-penguin-wear.cyclic.app/signIn");
     }
     // Fetching all posts
     fetchPosts();
