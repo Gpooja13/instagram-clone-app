@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
   } else {
     const token = authorization.replace("Bearer ", "");
     jwt.verify(token, jwtSecret, (error, payload) => {
-      console.log(payload);
+     
       if (error) {
         return res.status(401).json({ error: "Login first" });
       }

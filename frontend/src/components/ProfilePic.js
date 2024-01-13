@@ -38,7 +38,7 @@ const ProfilePic = ({ changeProfile }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+     
         changeProfile();
         window.location.reload();
         //   if (res.error) {

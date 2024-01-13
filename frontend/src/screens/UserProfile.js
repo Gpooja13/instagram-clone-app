@@ -51,7 +51,7 @@ const UserProfile = () => {
   };
 
   const unfollowUser = (userId) => {
-    console.log(userId);
+   
     fetch("/unfollow", {
       method: "put",
       body: JSON.stringify({ followId: userId }),
@@ -62,7 +62,7 @@ const UserProfile = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+       
         setIsFollow(false);
         setRefresh(true);
       });
@@ -78,11 +78,7 @@ const UserProfile = () => {
       .then((result) => {
         setUser(result.user);
         setPic(result.posts);
-        console.log(
-          result.user.followers.includes(
-            JSON.parse(localStorage.getItem("user"))._id
-          )
-        );
+       
         if (
           result.user.followers.includes(
             JSON.parse(localStorage.getItem("user"))._id

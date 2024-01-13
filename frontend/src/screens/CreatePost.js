@@ -58,7 +58,7 @@ const CreatePost = () => {
           if (res.error) {
             notifyA(res.error);
           } else {
-            console.log(res)
+           
             notifyB("Successfully posted");
             navigate("/explore");
           }

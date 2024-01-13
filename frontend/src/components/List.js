@@ -4,7 +4,7 @@ import { RiCloseLine } from "react-icons/ri";
 
 const List = ({ toggleList, followData }) => {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
-  console.log(followData)
+ 
   return (
     <div className="dark-bg">
       <div className="centered">

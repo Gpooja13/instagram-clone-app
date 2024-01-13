@@ -62,7 +62,7 @@ const Home = () => {
           }
         });
         setData(newData);
-        console.log(result);
+     
       });
   };
 
@@ -85,7 +85,7 @@ const Home = () => {
           }
         });
         setData(newData);
-        console.log(result);
+     
       });
   };
 

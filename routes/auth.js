@@ -61,7 +61,6 @@ router.post("/signIn", (req, res) => {
       .catch((err) => {
         console.log(err);
       });
-    console.log(savedUser);
   });
 });
 
@@ -74,7 +73,6 @@ router.post("/googleLogin", (req, res) => {
           const token = jwt.sign({ id: savedUser._id }, jwtSecret);
           const { _id, name, email, username } = savedUser;
           res.json({ token, user: { _id, name, email, username } });
-          console.log(savedUser);
         } else {
           const password = email + clientId;
           const newUserName = username.split("@")[0];
@@ -90,7 +88,7 @@ router.post("/googleLogin", (req, res) => {
             const token = jwt.sign({ id: userId }, jwtSecret);
             const { _id, name, email, username } = user;
             res.json({ token, user: { _id, name, email, username } });
-            console.log({ token, user: { _id, name, email, username } });
+           
           });
         }
       })

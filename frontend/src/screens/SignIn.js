@@ -47,9 +47,8 @@ const SignIn = () => {
   };
 
   const contiWithGoogle = async (credentialResponse) => {
-    console.log(credentialResponse);
+   
     const jwtDetail = jwtDecode(credentialResponse.credential);
-    console.log(jwtDetail);
 
     const fetchSignUp = await fetch("/googleLogin", {
       method: "post",

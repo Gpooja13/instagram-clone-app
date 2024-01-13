@@ -82,7 +82,7 @@ const Explore = () => {
           }
         });
         setData(newData);
-        console.log(result);
+       
       });
   };
 
@@ -105,7 +105,7 @@ const Explore = () => {
           }
         });
         setData(newData);
-        console.log(result);
+        
       });
   };
 

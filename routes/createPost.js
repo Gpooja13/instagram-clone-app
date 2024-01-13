@@ -24,7 +24,7 @@ router.post("/createPost", requireLogin, (req, res) => {
   if (!photo || !body) {
     return res.status(422).json({ error: "Enter all details" });
   }
-  console.log(req.user);
+ 
   const post = new POST({ body, photo, postedBy: req.user });
   post
     .save()
