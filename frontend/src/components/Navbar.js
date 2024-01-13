@@ -25,13 +25,13 @@ const Navbar = (props) => {
           <nav className="main-menu">
             <ul className="menu-container">
               <li>
-                <NavLink to="/">
+                <NavLink to="long-lime-penguin-wear.cyclic.app/">
                   <img className="logo" src={logo_word} alt="Instagram" />
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/"
+                  to="long-lime-penguin-wear.cyclic.app/"
                   className={({ isActive }) => (isActive ? "selectedTab" : "")}
                 >
                   <span class="material-symbols-outlined menu-icon">home</span>
@@ -40,7 +40,7 @@ const Navbar = (props) => {
               </li>
               <li>
                 <NavLink
-                  to="/explore"
+                  to="long-lime-penguin-wear.cyclic.app/explore"
                   className={({ isActive }) => (isActive ? "selectedTab" : "")}
                 >
                   <span class="material-symbols-outlined menu-icon">
@@ -51,7 +51,7 @@ const Navbar = (props) => {
               </li>
               <li>
                 <NavLink
-                  to="/createPost"
+                  to="long-lime-penguin-wear.cyclic.app/createPost"
                   className={({ isActive }) => (isActive ? "selectedTab" : "")}
                 >
                   <span class="material-symbols-outlined menu-icon">
@@ -62,7 +62,7 @@ const Navbar = (props) => {
               </li>
               <li>
                 <NavLink
-                  to="/profile"
+                  to="long-lime-penguin-wear.cyclic.app/profile"
                   className={({ isActive }) => (isActive ? "selectedTab" : "")}
                 >
                   <span class="material-symbols-outlined menu-icon">
