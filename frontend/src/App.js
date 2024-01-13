@@ -32,7 +32,7 @@ function App() {
           <Route path="long-lime-penguin-wear.cyclic.app/createPost" element={<CreatePost />} />
           <Route path="long-lime-penguin-wear.cyclic.app/profile/:userid" element={<UserProfile />} />
           <Route path="long-lime-penguin-wear.cyclic.app/explore" element={<Explore />} />
-          <Route path="*" element={<Error />} />
+          <Route path="long-lime-penguin-wear.cyclic.app/*" element={<Error />} />
         </Routes>
         <ToastContainer />
         {modalOpen && <Modal/>}
