@@ -20,18 +20,18 @@ function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [userLogin, setUserLogin] = useState(false);
   return (
-    <BrowserRouter basename="long-lime-penguin-wear.cyclic.app" >
+    <BrowserRouter>
     <GoogleOAuthProvider clientId="715281373099-rnp1d2vte3fr364qsui8fou90lu598t5.apps.googleusercontent.com">
       <LoginContext.Provider value={{ setUserLogin, setModalOpen }}>
         <Navbar login={userLogin} modalOpen={modalOpen} />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signIn" element={<SignIn />} />
-          <Route path="/signUp" element={<SignUp />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/createPost" element={<CreatePost />} />
-          <Route path="/profile/:userid" element={<UserProfile />} />
-          <Route path="/explore" element={<Explore />} />
+          <Route path="long-lime-penguin-wear.cyclic.app/" element={<Home />} />
+          <Route path="long-lime-penguin-wear.cyclic.app/signIn" element={<SignIn />} />
+          <Route path="long-lime-penguin-wear.cyclic.app/signUp" element={<SignUp />} />
+          <Route path="long-lime-penguin-wear.cyclic.app/profile" element={<Profile />} />
+          <Route path="long-lime-penguin-wear.cyclic.app/createPost" element={<CreatePost />} />
+          <Route path="long-lime-penguin-wear.cyclic.app/profile/:userid" element={<UserProfile />} />
+          <Route path="long-lime-penguin-wear.cyclic.app/explore" element={<Explore />} />
           <Route path="*" element={<Error />} />
         </Routes>
         <ToastContainer />
