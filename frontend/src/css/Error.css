@@ -1,0 +1,8 @@
+.errorPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+    height: 90vh;
+    float: right;
+}

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Suggestion from '../components/Suggestion';
 import PostDetail from "../components/PostDetail";
+import Emoji from "../components/Emoji";
 import("../css/Home.css");
 
 const Home = () => {
@@ -24,7 +25,7 @@ const Home = () => {
       navigate("/signIn");
     }
     // Fetching all posts
-    fetch("/myfollowingpost", {
+    fetch("http://localhost:5000/myfollowingpost", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -44,7 +45,7 @@ const Home = () => {
   };
 
   const likePost = (id) => {
-    fetch("/like", {
+    fetch("http://localhost:5000/like", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +68,7 @@ const Home = () => {
   };
 
   const unlikePost = (id) => {
-    fetch("/unlike", {
+    fetch("http://localhost:5000/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +91,7 @@ const Home = () => {
   };
 
   const makeComment = (text, id) => {
-    fetch("/comment", {
+    fetch("http://localhost:5000/comment", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -201,12 +202,13 @@ const Home = () => {
               </div>
               {/* commment */}
               <div className="add-comment">
-                <span
+                {/* <span
                   class="material-symbols-outlined"
                   style={{ color: "#8d8d99", fontSize: "larger" }}
                 >
                   mood
-                </span>
+                </span> */}
+                <Emoji setComment={setComment}/>
                 <input
                   placeholder="Add a Comment"
                   value={comment}

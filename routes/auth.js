@@ -51,8 +51,8 @@ router.post("/signIn", (req, res) => {
       .then((match) => {
         if (match) {
           const token = jwt.sign({ id: savedUser._id }, jwtSecret);
-          const { _id, name, email, username,Photo } = savedUser;
-          res.json({ token, user: { _id, name, email, username ,Photo} });
+          const { _id, name, email, username, Photo } = savedUser;
+          res.json({ token, user: { _id, name, email, username, Photo } });
           // return res.status(200).json({ message: "Signed in successfully" });
         } else {
           return res.status(422).json({ error: "Invalid password" });
@@ -88,11 +88,79 @@ router.post("/googleLogin", (req, res) => {
             const token = jwt.sign({ id: userId }, jwtSecret);
             const { _id, name, email, username } = user;
             res.json({ token, user: { _id, name, email, username } });
-           
           });
         }
       })
       .catch((error) => console.log(error));
+  }
+});
+
+
+
+
+router.post("/forgot", async (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    return res.status(422).json({ error: "Please enter email" });
+  }
+  const savedUser = await USER.findOne({ email: email });
+  if (!savedUser) {
+    return res.status(422).json({ error: "Invalid email" });
+  }
+  var token = jwt.sign({ email: email }, jwtSecret, {
+    expiresIn: "1d",
+  });
+
+  var transporter = nodemailer.createTransport({
+    host: "sandbox.smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+      user: "91a92acf060d12",
+      pass: "0a7517b0b5ee9b",
+    },
+  });
+
+  const info = await transporter.sendMail({
+    from: '"Insta-Clone 👻" <maddison53@ethereal.email>', // sender address
+    to: email, // list of receivers
+    subject: "Reset Password ✔", // Subject line
+    html: `<div><h2>Reset Password</h2><span>Generated URL :<a href="http://localhost:3000/forgotPassword/${token}">Click here to reset Password</a> </span></div>`, // html body
+  });
+  if (!info) {
+    return res.status(422).json({ error: "Error! Try Again." });
+  }
+  console.log("Message sent: %s", info.messageId);
+  return res.status(200).json({ res: "Email sent! Check your Email." });
+});
+
+
+
+
+router.put("/changePassword", async (req, res) => {
+  const { token, password } = req.body;
+  if (!token || !password) {
+    return res.status(422).json({ error: "Please enter Password" });
+  }
+
+  const payload = await jwt.verify(token, jwtSecret);
+  if (!payload) {
+    return res.status(422).json({ error: "User not exist" });
+  }
+
+  var hashedPassword = bcrypt.hash(password, 12);
+
+  let updated = await user.findOneAndUpdate(
+    { email: email },
+    { password: hashedPassword },
+    {
+      new: true, //return modified object
+    }
+  );
+
+  if (updated) {
+    return res.status(200).json({ res: "Password updated successfully" });
+  } else {
+    return res.status(422).json({ error: "User not exist" });
   }
 });
 

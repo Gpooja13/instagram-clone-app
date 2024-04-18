@@ -1,0 +1,9 @@
+.emojiPicker{
+    position: absolute;
+    z-index: 40;
+}
+
+.emojiSymbol{
+    color: #8d8d99;
+    font-size: larger;
+}

@@ -11,7 +11,7 @@ const Suggestion = () => {
   const userData = JSON.parse(localStorage.getItem("user"));
 
   const getSuggestion = async () => {
-    const fetchData = await fetch("/getsuggestion", {
+    const fetchData = await fetch("http://localhost:5000/getsuggestion", {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -23,7 +23,7 @@ const Suggestion = () => {
   };
 
   const followUser = (userId) => {
-    fetch("/follow", {
+    fetch("http://localhost:5000/follow", {
       method: "put",
       headers: {
         "Content-Type": "application/json",

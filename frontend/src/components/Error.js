@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import "../css/Error.css";
 
 const Error = () => {
   return (
-    <div>Error</div>
+    <div className='errorPage'><img  src="404-page.png" alt="" width={500} height={250}/></div>
   )
 }
 

@@ -5,8 +5,14 @@ import { useNavigate } from "react-router-dom";
 import "../css/Modal.css";
 
 const Modal = () => {
+  const { setModalOpen} = useContext(LoginContext);
   const navigate = useNavigate();
-  const { setModalOpen } = useContext(LoginContext);
+  const logout=() => {
+    setModalOpen(false);
+    localStorage.clear();
+    navigate("/signIn");
+    window.location.reload();
+  }
 
   return (
     <div className="dark-bg" >
@@ -15,21 +21,16 @@ const Modal = () => {
           <div className="modal-heading ">
             <h5>Confirm</h5>
           </div>
-          {/* <button className="close-btn" onClick={() => setModalOpen(false)}>
+          <button className="close-btn" onClick={() => setModalOpen(false)}>
             <RiCloseLine />
-          </button> */}
-          <div className="statement">Do you really want to log out?</div>
+          </button>
+          <div className="statement">`Do you really want to logout?`</div>
           <div className="buttons">
             <button
             className="logout-btn"
-              onClick={() => {
-                setModalOpen(false);
-                localStorage.clear();
-                navigate("/signIn");
-                window.location.reload();
-              }}
+              onClick={()=>{logout()}}
             >
-              Log Out
+              Logout
             </button>
             <button className="cancel-btn" onClick={() => setModalOpen(false)}>
               Cancel

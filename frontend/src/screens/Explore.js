@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Suggestion from "../components/Suggestion";
 import PostDetail from "../components/PostDetail";
+import Emoji from "../components/Emoji";
 import("../css/Home.css");
+
 
 const Explore = () => {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
@@ -34,7 +36,7 @@ const Explore = () => {
   }, []);
 
   const fetchPosts = () => {
-    fetch(`/allPosts?limit=${limit}&skip=${skip}`, {
+    fetch(`http://localhost:5000/allPosts?limit=${limit}&skip=${skip}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -64,7 +66,7 @@ const Explore = () => {
   };
 
   const likePost = (id) => {
-    fetch("/like", {
+    fetch("http://localhost:5000/like", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -87,7 +89,7 @@ const Explore = () => {
   };
 
   const unlikePost = (id) => {
-    fetch("/unlike", {
+    fetch("http://localhost:5000/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +112,7 @@ const Explore = () => {
   };
 
   const makeComment = (text, id) => {
-    fetch("/comment", {
+    fetch("http://localhost:5000/comment", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -221,12 +223,13 @@ const Explore = () => {
               </div>
               {/* commment */}
               <div className="add-comment">
-                <span
+                {/* <span
                   class="material-symbols-outlined"
                   style={{ color: "#8d8d99", fontSize: "larger" }}
                 >
                   mood
-                </span>
+                </span> */}
+                <Emoji setComment={setComment}/>
                 <input
                   placeholder="Add a Comment"
                   value={comment}

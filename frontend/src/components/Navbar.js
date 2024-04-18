@@ -1,16 +1,19 @@
-import React, { useContext, useEffect,useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { LoginContext } from "../context/LoginContext";
 import logo_word from "../img/logo_word.png";
 import "../css/Navbar.css";
 
 const Navbar = (props) => {
-  const { setModalOpen } = useContext(LoginContext);
+  const { setModalOpen,setSearchOpen} = useContext(LoginContext);
   const [modal, setModal] = useState(false);
+  const [sModal, setSModal] = useState(false);
 
   const toggleScroll = () => {
+    
     setModal(props.modalOpen);
-    if (modal) {
+    setSModal(props.searchOpen);
+    if (modal || sModal) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
@@ -49,6 +52,19 @@ const Navbar = (props) => {
                   <span className="menu-text">Explore</span>
                 </NavLink>
               </li>
+
+              <li>
+                <NavLink
+                  onClick={() => {
+                    setSearchOpen(true);
+                  }}
+                >
+                  <span class="material-symbols-outlined menu-icon">
+                    search
+                  </span>
+                  <span className="menu-text"> Search</span>
+                </NavLink>
+              </li>
               <li>
                 <NavLink
                   to="/createPost"
@@ -60,6 +76,7 @@ const Navbar = (props) => {
                   <span className="menu-text"> Create</span>
                 </NavLink>
               </li>
+
               <li>
                 <NavLink
                   to="/profile"

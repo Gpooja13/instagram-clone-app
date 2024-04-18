@@ -47,7 +47,13 @@
 
 .input-details{
     width: 385px;
-    background-color: red;
+}
+
+.forgot{
+    font-size: small;
+    margin-top: 10px;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 

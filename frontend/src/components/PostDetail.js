@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../css/PostDetail.css";
+import DelModal from "../components/DelModal";
+import Emoji from "./Emoji";
 
 const PostDetail = ({ item, toggleDetails }) => {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
@@ -10,6 +12,7 @@ const PostDetail = ({ item, toggleDetails }) => {
   const [myProfile, setMyProfile] = useState(false);
   const [data, setData] = useState([]);
   const [comment, setComment] = useState("");
+  const [deleteModal, setDeleteModal] = useState(false);
 
   const notifyA = (msg) => toast.error(msg);
   const notifyB = (msg) => toast.success(msg);
@@ -25,26 +28,8 @@ const PostDetail = ({ item, toggleDetails }) => {
     }
   };
 
-  const removePost = (postId) => {
-    if (window.confirm("Do you really want to delete the post?")) {
-      fetch(`/deletePost/${postId}`, {
-        method: "delete",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("jwt"),
-        },
-      })
-        .then((res) => {
-          res.json();
-        })
-        .then(() => {
-          toggleDetails();
-          notifyB("Post Deleted Succesfully");
-        });
-    }
-  };
-
   const likePost = (id) => {
-    fetch("/like", {
+    fetch("http://localhost:5000/like", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +51,7 @@ const PostDetail = ({ item, toggleDetails }) => {
   };
 
   const unlikePost = (id) => {
-    fetch("/unlike", {
+    fetch("http://localhost:5000/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -89,7 +74,7 @@ const PostDetail = ({ item, toggleDetails }) => {
 
   const makeComment = (text, id) => {
     if (comment !== "") {
-      fetch("/comment", {
+      fetch("http://localhost:5000/comment", {
         method: "put",
         headers: {
           "Content-Type": "application/json",
@@ -120,7 +105,7 @@ const PostDetail = ({ item, toggleDetails }) => {
 
   const delComment = async (id, cid, postedById) => {
     if (userDetail._id === postedById) {
-      const delcom = await fetch("/uncomment", {
+      const delcom = await fetch("http://localhost:5000/uncomment", {
         method: "put",
         headers: {
           "Content-Type": "application/json",
@@ -147,6 +132,7 @@ const PostDetail = ({ item, toggleDetails }) => {
 
   return (
     <div className="showComment">
+   { deleteModal && <DelModal setDeleteModal={setDeleteModal}  id={item._id} toggleDetails={toggleDetails}/>}
       <div className="post-container">
         <div className="post-pic">
           <img src={item.photo} />
@@ -171,7 +157,10 @@ const PostDetail = ({ item, toggleDetails }) => {
             </div>
 
             {myProfile && (
-              <div onClick={() => removePost(item._id)}>
+              <div 
+               onClick={()=>setDeleteModal(true)}
+              
+              >
                 <span class="material-symbols-outlined">delete</span>
               </div>
             )}
@@ -206,6 +195,7 @@ const PostDetail = ({ item, toggleDetails }) => {
                   <span>{com.comment}</span>
                   <span style={{display:(com.postedBy._id===(JSON.parse(localStorage.getItem("user")))._id?"block":"none")}}
                     class="material-symbols-outlined delcomment-btn"
+                   
                     onClick={() => {
                       delComment(item._id, com._id, com.postedBy._id);
                       toggleDetails();
@@ -247,7 +237,8 @@ const PostDetail = ({ item, toggleDetails }) => {
           </div>
 
           <div className="add-comment" style={{marginBottom:"0",padding:"0"}}>
-            <span class="material-symbols-outlined">mood</span>
+            {/* <span class="material-symbols-outlined">mood</span> */}
+            <Emoji setComment={setComment}/>
             <input
               placeholder="Add a Comment"
               value={comment}

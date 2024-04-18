@@ -42,7 +42,7 @@ const Profile = () => {
 
   const fetchUserDetail = () => {
     fetch(
-      `/user/${
+      `http://localhost:5000/user/${
         JSON.parse(localStorage.getItem("user"))._id
       }`,
       {

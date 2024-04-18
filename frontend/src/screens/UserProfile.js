@@ -35,7 +35,7 @@ const UserProfile = () => {
   };
 
   const followUser = (userId) => {
-    fetch("/follow", {
+    fetch("http://localhost:5000/follow", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const UserProfile = () => {
 
   const unfollowUser = (userId) => {
    
-    fetch("/unfollow", {
+    fetch("http://localhost:5000/unfollow", {
       method: "put",
       body: JSON.stringify({ followId: userId }),
       headers: {
@@ -69,7 +69,7 @@ const UserProfile = () => {
   };
 
   const fetchUserDetail=()=>{
-    fetch(`/user/${userid}`, {
+    fetch(`http://localhost:5000/user/${userid}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },

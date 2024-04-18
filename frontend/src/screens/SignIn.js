@@ -24,7 +24,7 @@ const SignIn = () => {
       notifyA("Invalid email");
       return;
     }
-    const fetchSignIn = await fetch("/signIn", {
+    const fetchSignIn = await fetch("http://localhost:5000/signIn", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const SignIn = () => {
    
     const jwtDetail = jwtDecode(credentialResponse.credential);
 
-    const fetchSignUp = await fetch("/googleLogin", {
+    const fetchSignUp = await fetch("http://localhost:5000/googleLogin", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -88,6 +88,7 @@ const SignIn = () => {
               }}
               onError={() => {
                 console.log("Login Failed");
+                notifyA("Login failed");
               }}
             />
             <p className="choice-line">
@@ -126,6 +127,7 @@ const SignIn = () => {
             />
             <label htmlFor="floatingPassword">Password</label>
           </div>
+          <div className="forgot"> <Link style={{ textDecoration: "none",fontWeight:"500",color:"black" }} to="/forgot"> Forgot your Password</Link></div>
           <button type="submit" className="btn btn-primary btn-signIn my-3">
             Sign In
           </button>
@@ -134,7 +136,7 @@ const SignIn = () => {
       <div className="sec-content my-2">
         <div style={{ color: "black" }}>Don't have an account?</div>
         <span>
-          <Link style={{ textDecoration: "none" }} to="/signUp">
+          <Link style={{ textDecoration: "none",fontWeight:"500" }} to="/signUp">
             Sign Up
           </Link>
         </span>
