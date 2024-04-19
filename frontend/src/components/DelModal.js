@@ -1,7 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { RiCloseLine } from "react-icons/ri";
-import { LoginContext } from "../context/LoginContext";
-import { useNavigate } from "react-router-dom";
 import "../css/Modal.css";
 import { toast } from "react-toastify";
 
@@ -11,7 +9,7 @@ const Modal = ({setDeleteModal,id,toggleDetails}) => {
 
   const removePost = (postId) => {
     try {
-      if (window.confirm("Do you really want to delete the post?")) {
+     
       fetch(`http://localhost:5000/deletePost/${postId}`, {
         method: "delete",
         headers: {
@@ -25,7 +23,7 @@ const Modal = ({setDeleteModal,id,toggleDetails}) => {
           toggleDetails();
           notifyB("Post Deleted Succesfully");
         });
-    }
+    
     } catch (error) {
        notifyA(error);
     }
@@ -40,7 +38,7 @@ const Modal = ({setDeleteModal,id,toggleDetails}) => {
             <h5>Confirm</h5>
           </div>
           <button className="close-btn" onClick={() => setDeleteModal(false)}>
-            <RiCloseLine />
+            <RiCloseLine title="Close" />
           </button>
           <div className="statement">`Do you really want to delete?`</div>
           <div className="buttons">

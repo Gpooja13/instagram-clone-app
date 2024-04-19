@@ -17,6 +17,8 @@ import Explore from "./screens/Explore";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import SearchModal from "./components/SearchModal";
 import Forgot from "./screens/Forgot";
+import ChangePassword from "./screens/ChangePassword";
+
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -39,6 +41,7 @@ function App() {
             <Route path="/signIn" element={<SignIn />} />
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/forgot" element={<Forgot />} />
+            <Route path="/updatePassword/:token" element={<ChangePassword/>} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/createPost" element={<CreatePost />} />
             <Route path="/profile/:userid" element={<UserProfile />} />
@@ -50,7 +53,6 @@ function App() {
           {searchOpen && <SearchModal />}
         </LoginContext.Provider>
       </GoogleOAuthProvider>
-      ;
     </BrowserRouter>
   );
 }

@@ -1,10 +1,45 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo_word from "../img/logo_word.png";
+import { toast } from "react-toastify";
 
 const Forgot = () => {
   const [email, setEmail] = useState("");
-  const verifyUser = () => {};
+
+  const notifyA = (msg) => toast.error(msg);
+  const notifyB = (msg) => toast.success(msg);
+
+  const verifyUser = async (e) => {
+    try {
+      const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+      e.preventDefault();
+      if (!emailRegex.test(email)) {
+        notifyA("Invalid email");
+        return;
+      }
+
+      const postVerifyEmail = await fetch("http://localhost:5000/forgot", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+        }),
+      });
+
+      const verifyData = await postVerifyEmail.json();
+
+      if (verifyData.error) {
+        await notifyA(verifyData.error);
+      } else {
+        await notifyB(verifyData.res);
+      }
+    } catch (error) {
+      notifyB(error);
+    }
+  };
 
   return (
     <div className="signIn">

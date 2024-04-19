@@ -117,17 +117,27 @@ const Navbar = (props) => {
           <nav className="mob-main-menu">
             <ul className="mob-menu-container">
               <li className="">
-                <NavLink className="" to="/myfollowingpost">
-                  <span class="material-symbols-outlined menu-icon">home</span>
+                <NavLink className=""  to="/">
+                  <span class="material-symbols-outlined menu-icon" >home</span>
                 </NavLink>
               </li>
               <li className="">
-                <NavLink className="" aria-current="page" to="/">
+                <NavLink  onClick={() => {
+                    setSearchOpen(true);
+                  }} >
+                  <span class="material-symbols-outlined menu-icon">
+                    search
+                  </span>
+                </NavLink>
+              </li>
+              <li className="">
+                <NavLink className="" aria-current="page"  to="/explore">
                   <span class="material-symbols-outlined menu-icon">
                     explore
                   </span>
                 </NavLink>
               </li>
+             
               <li className="">
                 <NavLink className="" to="/createPost">
                   <span class="material-symbols-outlined menu-icon">

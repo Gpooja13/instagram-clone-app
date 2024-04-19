@@ -6,3 +6,28 @@
     height: 90vh;
     float: right;
 }
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+} 
+  
+.error-container { 
+    text-align: center; 
+    padding: 20px; 
+    border-radius: 5px; 
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1); 
+} 
+  
+.error-code { 
+    font-size: 5rem; 
+    color: #ff5733; 
+} 
+  
+.error-msg { 
+    font-size: 1.5rem; 
+    color: #333; 
+    margin-bottom: 20px; 
+} 
+  

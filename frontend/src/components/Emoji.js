@@ -32,7 +32,7 @@ const Emoji = ({ setComment }) => {
   }, []);
 
   return (
-    <div>
+    <div style={{position:"relative",top: "2px"}}>
       <span
         class="material-symbols-outlined emojiSymbol"
         title="Emoji"

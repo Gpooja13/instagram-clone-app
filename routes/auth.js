@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const USER = mongoose.model("USER");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 
 jwtSecret = process.env.JWT_SECRET;
 
@@ -95,9 +96,6 @@ router.post("/googleLogin", (req, res) => {
   }
 });
 
-
-
-
 router.post("/forgot", async (req, res) => {
   const { email } = req.body;
   if (!email) {
@@ -124,7 +122,7 @@ router.post("/forgot", async (req, res) => {
     from: '"Insta-Clone 👻" <maddison53@ethereal.email>', // sender address
     to: email, // list of receivers
     subject: "Reset Password ✔", // Subject line
-    html: `<div><h2>Reset Password</h2><span>Generated URL :<a href="http://localhost:3000/forgotPassword/${token}">Click here to reset Password</a> </span></div>`, // html body
+    html: `<div><h2>Reset Password</h2><span>Generated URL :<a href="http://localhost:3000/updatePassword/${token}">Click here to reset Password</a> </span></div>`, // html body
   });
   if (!info) {
     return res.status(422).json({ error: "Error! Try Again." });
@@ -133,34 +131,32 @@ router.post("/forgot", async (req, res) => {
   return res.status(200).json({ res: "Email sent! Check your Email." });
 });
 
-
-
-
-router.put("/changePassword", async (req, res) => {
-  const { token, password } = req.body;
-  if (!token || !password) {
-    return res.status(422).json({ error: "Please enter Password" });
-  }
-
-  const payload = await jwt.verify(token, jwtSecret);
-  if (!payload) {
-    return res.status(422).json({ error: "User not exist" });
-  }
-
-  var hashedPassword = bcrypt.hash(password, 12);
-
-  let updated = await user.findOneAndUpdate(
-    { email: email },
-    { password: hashedPassword },
-    {
-      new: true, //return modified object
+router.patch("/changePassword", async (req, res) => {
+  try {
+    const { token, password } = req.body;
+    if (!token || !password) {
+      return res.status(422).json({ error: "Please enter Password" });
     }
-  );
 
-  if (updated) {
-    return res.status(200).json({ res: "Password updated successfully" });
-  } else {
-    return res.status(422).json({ error: "User not exist" });
+    const payload = await jwt.verify(token, jwtSecret);
+    if (!payload) {
+      return res.status(422).json({ error: "User does not exist" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    const updatedUser = await USER.findOneAndUpdate(
+      { email: payload.email },
+      { password: hashedPassword },
+      {
+        new: true, // return modified object
+      }
+    );
+
+    return res.json({ success: "Password updated successfully" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
 

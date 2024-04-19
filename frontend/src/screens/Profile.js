@@ -80,9 +80,7 @@ const Profile = () => {
         {/* details */}
         <div className="profile-data">
           <div>
-            <h1
-              className="username-heading"
-            >
+            <h1 className="username-heading">
               {JSON.parse(localStorage.getItem("user")).username}
             </h1>
           </div>
@@ -128,19 +126,29 @@ const Profile = () => {
       {/* gallery */}
       <hr />
       <div className="gallery">
-        <div>
-          {pic.map((pics) => {
-            return (
-              <img
-                key={pics._id}
-                src={pics.photo}
-                onClick={() => {
-                  toggleDetails(pics);
-                }}
-              />
-            );
-          })}
-        </div>
+        {pic.map((pics) => {
+          return (
+            <>
+              {pics.mediaType === "Image" ? (
+                <img
+                  key={pics._id}
+                  src={pics.photo}
+                  onClick={() => {
+                    toggleDetails(pics);
+                  }}
+                />
+              ) : (
+                <video
+                  key={pics._id}
+                  src={pics.photo}
+                  onClick={() => {
+                    toggleDetails(pics);
+                  }}
+                ></video>
+              )}
+            </>
+          );
+        })}
       </div>
       {show && <PostDetail item={posts} toggleDetails={toggleDetails} />}
       {changePic && <ProfilePic changeProfile={changeProfile} />}

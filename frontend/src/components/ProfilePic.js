@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { RiCloseLine } from "react-icons/ri";
 import "../css/ProfilePic.css";
 
 const ProfilePic = ({ changeProfile }) => {

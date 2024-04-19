@@ -22,7 +22,7 @@ const Modal = () => {
             <h5>Confirm</h5>
           </div>
           <button className="close-btn" onClick={() => setModalOpen(false)}>
-            <RiCloseLine />
+            <RiCloseLine title="Close" />
           </button>
           <div className="statement">`Do you really want to logout?`</div>
           <div className="buttons">

@@ -7,7 +7,6 @@ import PostDetail from "../components/PostDetail";
 import Emoji from "../components/Emoji";
 import("../css/Home.css");
 
-
 const Explore = () => {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
   const [data, setData] = useState([]);
@@ -84,7 +83,6 @@ const Explore = () => {
           }
         });
         setData(newData);
-       
       });
   };
 
@@ -107,7 +105,6 @@ const Explore = () => {
           }
         });
         setData(newData);
-        
       });
   };
 
@@ -142,11 +139,11 @@ const Explore = () => {
     <div>
       <Suggestion />
       <div className="card">
-        {data.map((posts) => {
+        {data.map((posts, index) => {
           return (
             <>
               {/* card header */}
-              <div className="card-header">
+              <div className="card-header" key={index}>
                 <div className="card-pic">
                   <img
                     src={posts.postedBy.Photo ? posts.postedBy.Photo : picLink}
@@ -168,7 +165,11 @@ const Explore = () => {
               </div>
               {/* post */}
               <div className="card-image">
-                <img src={posts.photo} alt="pic" />
+                {posts.mediaType === "Image" ? (
+                  <img src={posts.photo} alt="pic" />
+                ) : (
+                  <video src={posts.photo} controls />
+                )}
               </div>
               {/* card content */}
               <div className="card-content">
@@ -229,7 +230,7 @@ const Explore = () => {
                 >
                   mood
                 </span> */}
-                <Emoji setComment={setComment}/>
+                <Emoji setComment={setComment} />
                 <input
                   placeholder="Add a Comment"
                   value={comment}

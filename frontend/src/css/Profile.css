@@ -46,6 +46,14 @@ margin: 10px auto; */
 
 }
 
+.gallery video {
+    width: 270px;
+    height: 270px;
+    object-fit: cover;
+    margin: 5px;
+
+}
+
 .text-bolder {
     font-weight: 500;
 }
@@ -79,6 +87,7 @@ margin: 10px auto; */
         height: 90px;
     }
 
+
     .profile-data {
         text-align: left;
         margin-top: 20px;
@@ -86,6 +95,7 @@ margin: 10px auto; */
 
     .username-heading h1 {
         margin-bottom: 10px;
+        font-size: x-large;
     }
 
     .profile-info {
@@ -99,6 +109,12 @@ margin: 10px auto; */
     }
 
     .gallery img {
+        width: 26vw;
+        height: 26vw;
+        margin: 5px;
+    }
+
+    .gallery video {
         width: 26vw;
         height: 26vw;
         margin: 5px;

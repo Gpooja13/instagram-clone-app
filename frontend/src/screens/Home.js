@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Suggestion from '../components/Suggestion';
+import Suggestion from "../components/Suggestion";
 import PostDetail from "../components/PostDetail";
 import Emoji from "../components/Emoji";
 import("../css/Home.css");
@@ -63,7 +63,6 @@ const Home = () => {
           }
         });
         setData(newData);
-     
       });
   };
 
@@ -86,7 +85,6 @@ const Home = () => {
           }
         });
         setData(newData);
-     
       });
   };
 
@@ -147,8 +145,13 @@ const Home = () => {
               </div>
               {/* post */}
               <div className="card-image">
-                <img src={posts.photo} alt="pic" />
+                {posts.mediaType === "Image" ? (
+                  <img src={posts.photo} alt="pic" />
+                ) : (
+                  <video src={posts.photo} controls />
+                )}
               </div>
+
               {/* card content */}
               <div className="card-content">
                 {posts.likes.includes(
@@ -208,7 +211,7 @@ const Home = () => {
                 >
                   mood
                 </span> */}
-                <Emoji setComment={setComment}/>
+                <Emoji setComment={setComment} />
                 <input
                   placeholder="Add a Comment"
                   value={comment}

@@ -8,7 +8,7 @@ import Emoji from "./Emoji";
 const PostDetail = ({ item, toggleDetails }) => {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
 
-  const [numofComment, setnumofComment] = useState([])
+  const [numofComment, setnumofComment] = useState([]);
   const [myProfile, setMyProfile] = useState(false);
   const [data, setData] = useState([]);
   const [comment, setComment] = useState("");
@@ -20,7 +20,7 @@ const PostDetail = ({ item, toggleDetails }) => {
   const userDetail = JSON.parse(localStorage.getItem("user"));
 
   const checkUser = () => {
-    setnumofComment(item.comments)
+    setnumofComment(item.comments);
     if (userDetail._id === item.postedBy._id) {
       setMyProfile(true);
     } else {
@@ -132,10 +132,20 @@ const PostDetail = ({ item, toggleDetails }) => {
 
   return (
     <div className="showComment">
-   { deleteModal && <DelModal setDeleteModal={setDeleteModal}  id={item._id} toggleDetails={toggleDetails}/>}
+      {deleteModal && (
+        <DelModal
+          setDeleteModal={setDeleteModal}
+          id={item._id}
+          toggleDetails={toggleDetails}
+        />
+      )}
       <div className="post-container">
         <div className="post-pic">
-          <img src={item.photo} />
+          {item.mediaType === "Image" ? (
+            <img src={item.photo} alt="pic" />
+          ) : (
+            <video src={item.photo} controls />
+          )}
         </div>
 
         <div className="details">
@@ -148,19 +158,24 @@ const PostDetail = ({ item, toggleDetails }) => {
           >
             <div className="self-menu">
               <div className="card-pic">
-                <img src={item.postedBy.Photo?item.postedBy.Photo:picLink} alt="pic" />
+                <img
+                  src={item.postedBy.Photo ? item.postedBy.Photo : picLink}
+                  alt="pic"
+                />
               </div>
-              
-              <h5 className="mx-3"><Link className="name-link" to={`/profile/${item.postedBy._id}`}>
-                    {item.postedBy.name}
-                  </Link></h5>
+
+              <h5 className="mx-3">
+                <Link
+                  className="name-link"
+                  to={`/profile/${item.postedBy._id}`}
+                >
+                  {item.postedBy.name}
+                </Link>
+              </h5>
             </div>
 
             {myProfile && (
-              <div 
-               onClick={()=>setDeleteModal(true)}
-              
-              >
+              <div onClick={() => setDeleteModal(true)}>
                 <span class="material-symbols-outlined">delete</span>
               </div>
             )}
@@ -168,11 +183,17 @@ const PostDetail = ({ item, toggleDetails }) => {
 
           <div className="card-caption">
             <div className="card-pic">
-              <img src={item.postedBy.Photo?item.postedBy.Photo:picLink} alt="pic" />
+              <img
+                src={item.postedBy.Photo ? item.postedBy.Photo : picLink}
+                alt="pic"
+              />
               <span className=" userPost-name">
-              <Link className="name-link" to={`/profile/${item.postedBy._id}`}>
-                    {item.postedBy.name}
-                  </Link>
+                <Link
+                  className="name-link"
+                  to={`/profile/${item.postedBy._id}`}
+                >
+                  {item.postedBy.name}
+                </Link>
               </span>
               <span>{item.body}</span>
             </div>
@@ -185,24 +206,36 @@ const PostDetail = ({ item, toggleDetails }) => {
             {numofComment.map((com) => {
               return (
                 <div>
-                <p className="card-pic" style={{marginBottom:"10px"}}>
-              <img src={com.postedBy.Photo?com.postedBy.Photo:picLink} alt="pic" />
-                  <span className="userPost-name" >
-                  <Link className="name-link" to={`/profile/${com.postedBy._id}`}>
-                    {com.postedBy.name}
-                  </Link>
-                  </span>
-                  <span>{com.comment}</span>
-                  <span style={{display:(com.postedBy._id===(JSON.parse(localStorage.getItem("user")))._id?"block":"none")}}
-                    class="material-symbols-outlined delcomment-btn"
-                   
-                    onClick={() => {
-                      delComment(item._id, com._id, com.postedBy._id);
-                      toggleDetails();
-                    }}
-                  >
-                    delete_forever
-                  </span>
+                  <p className="card-pic" style={{ marginBottom: "10px" }}>
+                    <img
+                      src={com.postedBy.Photo ? com.postedBy.Photo : picLink}
+                      alt="pic"
+                    />
+                    <span className="userPost-name">
+                      <Link
+                        className="name-link"
+                        to={`/profile/${com.postedBy._id}`}
+                      >
+                        {com.postedBy.name}
+                      </Link>
+                    </span>
+                    <span>{com.comment}</span>
+                    <span
+                      style={{
+                        display:
+                          com.postedBy._id ===
+                          JSON.parse(localStorage.getItem("user"))._id
+                            ? "block"
+                            : "none",
+                      }}
+                      class="material-symbols-outlined delcomment-btn"
+                      onClick={() => {
+                        delComment(item._id, com._id, com.postedBy._id);
+                        toggleDetails();
+                      }}
+                    >
+                      delete_forever
+                    </span>
                   </p>
                 </div>
               );
@@ -236,9 +269,12 @@ const PostDetail = ({ item, toggleDetails }) => {
             <p>{item.likes.length} Likes</p>
           </div>
 
-          <div className="add-comment" style={{marginBottom:"0",padding:"0"}}>
+          <div
+            className="add-comment"
+            style={{ marginBottom: "0", padding: "0" }}
+          >
             {/* <span class="material-symbols-outlined">mood</span> */}
-            <Emoji setComment={setComment}/>
+            <Emoji setComment={setComment} />
             <input
               placeholder="Add a Comment"
               value={comment}
@@ -263,6 +299,7 @@ const PostDetail = ({ item, toggleDetails }) => {
         <span
           class="material-symbols-outlined"
           style={{ fontSize: "xx-large" }}
+          title="Close"
           onClick={() => toggleDetails()}
         >
           close

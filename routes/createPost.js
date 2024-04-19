@@ -20,12 +20,12 @@ router.get("/allPosts", requireLogin, (req, res) => {
 });
 
 router.post("/createPost", requireLogin, (req, res) => {
-  const { body, photo } = req.body;
-  if (!photo || !body) {
+  const { body, photo,mediaType } = req.body;
+  if (!photo || !body ||!mediaType) {
     return res.status(422).json({ error: "Enter all details" });
   }
  
-  const post = new POST({ body, photo, postedBy: req.user });
+  const post = new POST({ body, photo, postedBy: req.user,mediaType });
   post
     .save()
     .then((result) => {

@@ -13,7 +13,7 @@ const List = ({ toggleList, followData }) => {
             <h5>Followers</h5>
           </div>
           <button className="close-btn" onClick={() => toggleList()}>
-            <RiCloseLine />
+            <RiCloseLine title="Close" />
           </button>
           {followData.map((val) => {
             return (

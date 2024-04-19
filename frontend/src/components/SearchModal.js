@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { RiCloseLine } from "react-icons/ri";
 import { LoginContext } from "../context/LoginContext";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../css/Search.css";
 
 const SearchModal = () => {
-  const { setSearchOpen,searchOpen } = useContext(LoginContext);
+  const { setSearchOpen } = useContext(LoginContext);
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
@@ -63,7 +62,7 @@ const SearchModal = () => {
             title="Close"
             onClick={() => setSearchOpen(false)}
           >
-            <RiCloseLine />
+            <RiCloseLine title="Close" />
           </button>
           {searchResult?.length !== 0 && search ? (
             searchResult?.map((val) => {

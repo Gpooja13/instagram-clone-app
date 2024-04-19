@@ -19,7 +19,7 @@ const Suggestion = () => {
     });
     const data = await fetchData.json();
     setSuggestedData(data);
-    console.log(data);
+   
   };
 
   const followUser = (userId) => {
@@ -33,7 +33,7 @@ const Suggestion = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+       
         setIsFollow(true);
       });
   };
@@ -50,13 +50,13 @@ const Suggestion = () => {
             <div className="side-card">
               <img
                 className="side-profile-pic"
-                src={userData.Photo ? userData.Photo : picLink}
+                src={userData?.Photo ? userData?.Photo : picLink}
                 alt="picture"
               />
               <div className="side-card-details">
                 <Link to="/profile">
                   <span className="menu-text" style={{ fontSize: "medium" , fontWeight:"500"}}>
-                    {userData.username}
+                    {userData?.username}
                   </span>
                 </Link>
                 <button
@@ -74,7 +74,7 @@ const Suggestion = () => {
           {suggestedData.map((val) => {
             return (
               <>
-                <li className="sidebar-item">
+                <li className="sidebar-item" key={val._id}>
                   <div className="side-card">
                     <img
                       className="side-profile-pic"
