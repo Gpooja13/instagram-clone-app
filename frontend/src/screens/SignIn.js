@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LoginContext } from "../context/LoginContext";
@@ -71,10 +71,16 @@ const SignIn = () => {
       localStorage.setItem("jwt", signUpData.token);
       localStorage.setItem("user", JSON.stringify(signUpData.user));
       setUserLogin(true);
+      document.getElementsByClassName("main-navbar")[0].style.display="block";
       navigate("/");
       await notifyB("Successfully Login");
     }
   };
+
+  useEffect(() => {
+    document.getElementsByClassName("main-navbar")[0].style.display="none";
+  }, [])
+  
 
   return (
     <div className="signIn">

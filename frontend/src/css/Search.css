@@ -40,3 +40,18 @@
     margin-top: 25px;
     text-align: center;
 }
+
+
+
+
+@media screen and (max-width:800px) {
+    .searchModal {
+        height: 70vh;
+        width: 80vw;
+    }
+
+    .clearSymbol {
+        right: 5vw;
+        top: 10vh;
+    }
+}

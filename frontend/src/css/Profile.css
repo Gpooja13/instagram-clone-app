@@ -61,7 +61,7 @@ margin: 10px auto; */
 .username-heading {
     font-weight: 500;
     font-size: xx-large;
-    /* margin-bottom: 20px; */
+    margin-bottom: 20px;
 }
 
 
@@ -93,9 +93,9 @@ margin: 10px auto; */
         margin-top: 20px;
     }
 
-    .username-heading h1 {
-        margin-bottom: 10px;
+    .username-heading {
         font-size: x-large;
+        margin-bottom: 15px;
     }
 
     .profile-info {

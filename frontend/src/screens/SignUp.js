@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logo_word from "../img/logo_word.png";
@@ -56,7 +56,7 @@ const SignUp = () => {
     }
   };
 
-  const contiWithGoogle = async(credentialResponse) => {
+  const contiWithGoogle = async (credentialResponse) => {
     const jwtDetail = jwtDecode(credentialResponse.credential);
 
     const fetchSignUp = await fetch("http://localhost:5000/googleLogin", {
@@ -68,9 +68,9 @@ const SignUp = () => {
         name: jwtDetail.name,
         username: jwtDetail.email,
         email: jwtDetail.email,
-        email_verified:jwtDetail.email_verified,
-        clientId:credentialResponse.clientId,
-        Photo:jwtDetail.picture
+        email_verified: jwtDetail.email_verified,
+        clientId: credentialResponse.clientId,
+        Photo: jwtDetail.picture,
       }),
     });
     const signUpData = await fetchSignUp.json();
@@ -83,111 +83,120 @@ const SignUp = () => {
       navigate("/");
       await notifyB("Successfully Login");
     }
-    
   };
 
   return (
     <div className="signUp">
-      <div className="container main-content">
-        <form onSubmit={postData}>
-          <div className="center">
-            <img className="signUp-logo" src={logo_word} alt="Instagram" />
-            <p style={{ color: "black" }}>
-              Sign up to see photos and videos from your friends
-            </p>
-            <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              contiWithGoogle(credentialResponse);
-            }}
-            onError={() => {
-              console.log("Login Failed");
-            }}
-          />
-         
-          <p className="choice-line"><span className="line"></span><span>or</span><span className="line"></span></p> 
-          </div>
-          <div className="form-floating mb-2">
-            <input
-              type="text"
-              className="form-control input-signUp"
-              name="name"
-              id="name"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-              autoComplete="off"
-              placeholder="John Watson"
-            />
-            <label htmlFor="name">Full name</label>
-          </div>
+      <div>
+        <div className="container main-content">
+          <form onSubmit={postData}>
+            <div className="center">
+              <img className="signUp-logo" src={logo_word} alt="Instagram" />
+              <p style={{ color: "black" }}>
+                Sign up to see photos and videos from your friends
+              </p>
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  contiWithGoogle(credentialResponse);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
 
-          <div className="form-floating mb-2">
-            <input
-              type="text"
-              className="form-control input-signUp"
-              name="username"
-              id="username"
-              value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
-              autoComplete="off"
-              placeholder="johnWatson"
-            />
-            <label htmlFor="username">Username</label>
-          </div>
+              <p className="choice-line">
+                <span className="line"></span>
+                <span>or</span>
+                <span className="line"></span>
+              </p>
 
-          <div className="form-floating mb-2">
-            <input
-              type="email"
-              className="form-control input-signUp"
-              name="email"
-              id="email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              placeholder="name@example.com"
-            />
-            <label htmlFor="email">Email</label>
-          </div>
+              <div className="form-floating mb-2 inputDetail">
+                <input
+                  type="text"
+                  className="form-control input-signUp"
+                  name="name"
+                  id="name"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                  autoComplete="off"
+                  placeholder="John Watson"
+                />
+                <label htmlFor="name">Full name</label>
+              </div>
 
-          <div className="form-floating mb-2">
-            <input
-              type="password"
-              className="form-control input-signUp"
-              name="password"
-              id="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              placeholder="Password"
-            />
-            <label htmlFor="password">Password</label>
-          </div>
+              <div className="form-floating mb-2 inputDetail">
+                <input
+                  type="text"
+                  className="form-control input-signUp"
+                  name="username"
+                  id="username"
+                  value={username}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                  }}
+                  autoComplete="off"
+                  placeholder="johnWatson"
+                />
+                <label htmlFor="username">Username</label>
+              </div>
 
-          <button type="submit" className="btn btn-primary btn-signUp my-2">
-            Sign Up
-          </button>
+              <div className="form-floating mb-2 inputDetail">
+                <input
+                  type="email"
+                  className="form-control input-signUp"
+                  name="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                  autoComplete="off"
+                  placeholder="name@example.com"
+                />
+                <label htmlFor="email">Email</label>
+              </div>
 
-          
-          <div>
-            <p style={{ fontSize: "12px", margin: "5px 0" }}>
-              By signing up, you agree to out Terms, privacy policy and cookies
-              policy.
-            </p>
-          </div>
-        </form>
-      </div>
-      <div className="sec-content my-2">
-        <div style={{ color: "black" }}>Already have an account?</div>
-        <span>
-          <Link style={{ textDecoration: "none" }} to="/signIn">
-            Sign In
-          </Link>
-        </span>
+              <div className="form-floating mb-2 inputDetail">
+                <input
+                  type="password"
+                  className="form-control input-signUp"
+                  name="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                  autoComplete="off"
+                  placeholder="Password"
+                />
+                <label htmlFor="password">Password</label>
+              </div>
+
+              <button
+                type="submit"
+                className="btn btn-primary btn-signUp my-2 "
+              >
+                Sign Up
+              </button>
+            </div>
+            <div>
+              <p style={{ fontSize: "12px", margin: "5px 0" }}>
+                By signing up, you agree to out Terms, privacy policy and
+                cookies policy.
+              </p>
+            </div>
+          </form>
+        </div>
+        <div className="sec-content my-2">
+          <div style={{ color: "black" }}>Already have an account?</div>
+          <span>
+            <Link style={{ textDecoration: "none" }} to="/signIn">
+              Sign In
+            </Link>
+          </span>
+        </div>
       </div>
     </div>
   );

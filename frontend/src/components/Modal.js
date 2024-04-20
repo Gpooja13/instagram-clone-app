@@ -10,8 +10,9 @@ const Modal = () => {
   const logout=() => {
     setModalOpen(false);
     localStorage.clear();
+    document.getElementsByClassName("main-navbar")[0].style.display="none";
     navigate("/signIn");
-    window.location.reload();
+    // window.location.reload();
   }
 
   return (

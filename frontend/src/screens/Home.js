@@ -24,6 +24,8 @@ const Home = () => {
     if (!token) {
       navigate("/signIn");
     }
+
+    document.getElementsByClassName("main-navbar")[0].style.display="block";
     // Fetching all posts
     fetch("http://localhost:5000/myfollowingpost", {
       headers: {
@@ -114,6 +116,7 @@ const Home = () => {
         notifyB("Comment posted");
       });
   };
+
 
   return (
     <div>

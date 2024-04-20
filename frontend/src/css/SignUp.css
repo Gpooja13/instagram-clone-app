@@ -59,6 +59,10 @@
     margin: 10px;
 }
 
+.inputDetail{
+    width: 381px;
+}
+
 .form-floating>.form-control,
 .form-floating>.form-control-plaintext {
     padding: 1rem 0.75rem 0.2rem 0.75rem !important;
@@ -77,3 +81,31 @@
   padding: 0.8rem 0.75rem !important;
   font-size: 14px;
 }
+
+
+
+@media screen and (max-width:500px) {
+    
+    .sec-content{
+        width:450px;
+        margin-bottom: 10vh;
+    }
+
+     .inputDetail{
+        width: 80vw;
+    }
+
+    .btn-signUp{
+        width: 80vw;
+        
+    }
+
+    .signUp{    
+        height: 100vh;
+    }
+
+    p{
+        font-size: smaller;
+        width: 80vw;
+    }
+ }

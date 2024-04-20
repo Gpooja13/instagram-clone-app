@@ -53,8 +53,7 @@ li a {
 
 
 
-
-@media screen and (max-width:800px) {
+@media screen and (max-width:900px) {
   .nav-mobile {
     display: flex;
     position: fixed;
@@ -73,6 +72,7 @@ li a {
   .main-navbar ul {
     margin: 0;
     padding: 10px 0;
+    
   }
 
   .mob-menu-container {

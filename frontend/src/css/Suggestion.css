@@ -48,3 +48,13 @@
     color: #0095f6;
     font-size: small;
 }
+
+
+
+
+@media screen and (max-width:900px) {
+    .sidebar-container {
+        display: none;
+    }
+
+}
