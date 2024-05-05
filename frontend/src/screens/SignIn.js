@@ -24,7 +24,7 @@ const SignIn = () => {
       notifyA("Invalid email");
       return;
     }
-    const fetchSignIn = await fetch("http://localhost:5000/signIn", {
+    const fetchSignIn = await fetch("/signIn", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const SignIn = () => {
    
     const jwtDetail = jwtDecode(credentialResponse.credential);
 
-    const fetchSignUp = await fetch("http://localhost:5000/googleLogin", {
+    const fetchSignUp = await fetch("/googleLogin", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

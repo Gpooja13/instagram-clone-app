@@ -10,7 +10,7 @@ import Error from "./components/Error";
 import Modal from "./components/Modal";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import { LoginContext } from "./context/LoginContext";
 import UserProfile from "./screens/UserProfile";
 import Explore from "./screens/Explore";
@@ -18,7 +18,6 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import SearchModal from "./components/SearchModal";
 import Forgot from "./screens/Forgot";
 import ChangePassword from "./screens/ChangePassword";
-
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);

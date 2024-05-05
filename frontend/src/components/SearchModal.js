@@ -11,7 +11,7 @@ const SearchModal = () => {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
 
   const fetchSearchDetail = () => {
-    fetch(`http://localhost:5000/getSearch/${search}`, {
+    fetch(`/getSearch/${search}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },

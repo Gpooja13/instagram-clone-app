@@ -29,7 +29,7 @@ const PostDetail = ({ item, toggleDetails }) => {
   };
 
   const likePost = (id) => {
-    fetch("http://localhost:5000/like", {
+    fetch("/like", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const PostDetail = ({ item, toggleDetails }) => {
   };
 
   const unlikePost = (id) => {
-    fetch("http://localhost:5000/unlike", {
+    fetch("/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ const PostDetail = ({ item, toggleDetails }) => {
 
   const makeComment = (text, id) => {
     if (comment !== "") {
-      fetch("http://localhost:5000/comment", {
+      fetch("/comment", {
         method: "put",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +105,7 @@ const PostDetail = ({ item, toggleDetails }) => {
 
   const delComment = async (id, cid, postedById) => {
     if (userDetail._id === postedById) {
-      const delcom = await fetch("http://localhost:5000/uncomment", {
+      const delcom = await fetch("/uncomment", {
         method: "put",
         headers: {
           "Content-Type": "application/json",

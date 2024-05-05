@@ -11,7 +11,7 @@ const Suggestion = () => {
   const userData = JSON.parse(localStorage.getItem("user"));
 
   const getSuggestion = async () => {
-    const fetchData = await fetch("http://localhost:5000/getsuggestion", {
+    const fetchData = await fetch("/getsuggestion", {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -19,11 +19,10 @@ const Suggestion = () => {
     });
     const data = await fetchData.json();
     setSuggestedData(data);
-   
   };
 
   const followUser = (userId) => {
-    fetch("http://localhost:5000/follow", {
+    fetch("/follow", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +50,7 @@ const Suggestion = () => {
               <img
                 className="side-profile-pic"
                 src={userData?.Photo ? userData?.Photo : picLink}
-                alt="picture"
+                alt="pic"
               />
               <div className="side-card-details">
                 <Link to="/profile">
@@ -79,7 +78,7 @@ const Suggestion = () => {
                     <img
                       className="side-profile-pic"
                       src={val.Photo ? val.Photo : picLink}
-                      alt="picture"
+                      alt="pic"
                     />
                     <div className="side-card-details">
                       <Link to={`/profile/${val._id}`}>

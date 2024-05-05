@@ -10,7 +10,7 @@ const Modal = ({setDeleteModal,id,toggleDetails}) => {
   const removePost = (postId) => {
     try {
      
-      fetch(`http://localhost:5000/deletePost/${postId}`, {
+      fetch(`/deletePost/${postId}`, {
         method: "delete",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("jwt"),

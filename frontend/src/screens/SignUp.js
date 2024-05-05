@@ -35,7 +35,7 @@ const SignUp = () => {
       return;
     }
 
-    const fetchSignUp = await fetch("http://localhost:5000/signUp", {
+    const fetchSignUp = await fetch("/signUp", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ const SignUp = () => {
   const contiWithGoogle = async (credentialResponse) => {
     const jwtDetail = jwtDecode(credentialResponse.credential);
 
-    const fetchSignUp = await fetch("http://localhost:5000/googleLogin", {
+    const fetchSignUp = await fetch("/googleLogin", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

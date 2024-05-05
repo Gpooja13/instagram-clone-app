@@ -35,7 +35,7 @@ const Explore = () => {
   }, []);
 
   const fetchPosts = () => {
-    fetch(`http://localhost:5000/allPosts?limit=${limit}&skip=${skip}`, {
+    fetch(`/allPosts?limit=${limit}&skip=${skip}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -65,7 +65,7 @@ const Explore = () => {
   };
 
   const likePost = (id) => {
-    fetch("http://localhost:5000/like", {
+    fetch("/like", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const Explore = () => {
   };
 
   const unlikePost = (id) => {
-    fetch("http://localhost:5000/unlike", {
+    fetch("/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -109,7 +109,7 @@ const Explore = () => {
   };
 
   const makeComment = (text, id) => {
-    fetch("http://localhost:5000/comment", {
+    fetch("/comment", {
       method: "put",
       headers: {
         "Content-Type": "application/json",

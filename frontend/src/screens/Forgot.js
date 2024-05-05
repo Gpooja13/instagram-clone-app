@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo_word from "../img/logo_word.png";
 import { toast } from "react-toastify";
 
@@ -19,7 +19,7 @@ const Forgot = () => {
         return;
       }
 
-      const postVerifyEmail = await fetch("http://localhost:5000/forgot", {
+      const postVerifyEmail = await fetch("/forgot", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
