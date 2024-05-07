@@ -25,7 +25,7 @@ const Navbar = (props) => {
 
   const loginStatus = () => {
   
-    if (verifiedUser || props.login) {
+    if (token || props.login) {
       return [
         <>
           <nav className="main-menu">
@@ -114,7 +114,7 @@ const Navbar = (props) => {
 
   const loginStatusMobile = () => {
    
-    if (verifiedUser || props.login) {
+    if (token || props.login) {
       return [
         <>
           <nav className="mob-main-menu">
