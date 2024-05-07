@@ -179,25 +179,25 @@ const Navbar = (props) => {
     toggleScroll();
   });
 
-  useEffect(() => {
-    const verifyToken= async (e) => {
-      const fetchSignIn = await fetch("/verifyToken", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          token:localStorage.getItem("jwt"),
-        }),
-      });
-      const response = await fetchSignIn.json();
-      if (!response.res) {
-        localStorage.removeItem("jwt");
-        navigate("/signIn");
-      }
-    };
-    verifyToken();
-  }, [token]);
+  // useEffect(() => {
+  //   const verifyToken= async (e) => {
+  //     const fetchSignIn = await fetch("/verifyToken", {
+  //       method: "post",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         token:localStorage.getItem("jwt"),
+  //       }),
+  //     });
+  //     const response = await fetchSignIn.json();
+  //     if (!response.res) {
+  //       localStorage.removeItem("jwt");
+  //       navigate("/signIn");
+  //     }
+  //   };
+  //   verifyToken();
+  // }, [token]);
   
   return (
     <div className="main-navbar">
