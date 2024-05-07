@@ -8,7 +8,6 @@ const Navbar = (props) => {
   const { setModalOpen,setSearchOpen} = useContext(LoginContext);
   const [modal, setModal] = useState(false);
   const [sModal, setSModal] = useState(false);
-  const [verifiedUser, setVerifiedUser] = useState('');
   const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
 
@@ -192,11 +191,8 @@ const Navbar = (props) => {
         }),
       });
       const response = await fetchSignIn.json();
-      if (response.res) {
-        setVerifiedUser(true);
-      } else {
+      if (!response.res) {
         localStorage.removeItem("jwt");
-        setVerifiedUser(false);
         navigate("/signIn");
       }
     };
