@@ -1,70 +1,107 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+![Logo](https://res.cloudinary.com/cloudtrial/image/upload/v1705078914/rvaqu4tqxajhmkbcnta8.ico)
 
-### `npm start`
+# React Instagram Clone 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This project is a clone of the popular social media platform Instagram, built using React JS. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The purpose of this clone is to replicate the core functionalities of Instagram, allowing users to share photos, follow other users, like and comment on posts, and explore content posted by others, with the user interface of the popular social media platform - Instagram.
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- User Authentication: Sign up, log in, Google authentication and forget your password functionalities.
+- Responsive design for mobile and desktop devices.
+- Upload and share images/videos along with captions.
+- Follow other users to see their posts in your feed.
+- Discover new accounts and posts through the explore page.
+- Interact with posts by liking, commenting and viewing existing comments.
+- Search for users based on keywords.
+- View your posts and manage who you follow and who follows you on profile page.
+- Lazy loading feature for fetching posts.
 
-### `npm run build`
+## Demo
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The E-commerce demo can be viewed online here:
+https://instagram-clone-app-mrhb.onrender.com
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Screenshots
 
-### `npm run eject`
+- Login Page
+![Login](https://res.cloudinary.com/cloudtrial/image/upload/v1715067745/Screenshot_209_qun4un.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Home Page
+![Home](https://res.cloudinary.com/cloudtrial/image/upload/v1715067746/Screenshot_210_t97s3r.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Post Details
+![Post](https://res.cloudinary.com/cloudtrial/image/upload/v1715067749/Screenshot_215_coor37.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- User Profile
+![Profile](https://res.cloudinary.com/cloudtrial/image/upload/v1715067750/Screenshot_221_pyocbi.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Tech Stack
 
-## Learn More
+- React - (JavaScript library for building user interfaces)
+- Express - (Node.js framework for building the backend API)
+- Google Authentication for user authentication
+- MongoDB - (A database for storing user and post data)
+- Material-UI - (React UI framework for designing responsive and attractive components)
+- CSS Modules - (Modular CSS approach for styling React components)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Prerequisites
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Before running the project, make sure you have the following installed:
 
-### Code Splitting
+- Node.js
+- npm (Node Package Manager): Should be installed with Node.js
+## Getting Started
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Clone the repository: 
+```bash
+ git clone https://github.com/Gpooja13/shopping-app.git
+```
 
-### Analyzing the Bundle Size
+2. Navigate to the project directory:
+```bash
+cd react-instagram-clone
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. Install dependencies: 
+```bash
+npm install
+```
+4. Set up Google Auth: Create a project at [Google Cloud Console](https://console.cloud.google.com) and configure authentication.
 
-### Making a Progressive Web App
+3. Set up environment variables: Create a .env file in the root of your project and add the following environment variables.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+`MONGODB_STRING`
+`JWT_SECRET`
 
-### Advanced Configuration
+4. Run the development server: 
+```bash
+ npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+5. Open your browser and navigate to http://localhost:3000 to see the project running.
 
-### Deployment
+## Further Development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Direct Messaging: Enable private messaging between users.
+- Stories: Implement disappearing stories feature.
+- Explore Feed: Curate a personalized feed based on user interactions and interests.
+- Push Notifications: Send real-time notifications about likes, comments, and follower requests. (Requires server-side setup)
+- Image Editing: Allow basic image editing before uploading posts.
+- Introducing Night mode for better user experience.
 
-### `npm run build` fails to minify
+## Acknowledgements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project was inspired by the Instagram app.
+Special thanks to the developers of React, React Router, Material-UI, and other open-source libraries used in this project.
+
+
+## Contact
+
+For any questions or feedback, please contact: gpooja750@yahoo.com.
+
