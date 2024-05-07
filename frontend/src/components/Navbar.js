@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { LoginContext } from "../context/LoginContext";
 import logo_word from "../img/logo_word.png";
 import "../css/Navbar.css";
@@ -8,6 +8,9 @@ const Navbar = (props) => {
   const { setModalOpen,setSearchOpen} = useContext(LoginContext);
   const [modal, setModal] = useState(false);
   const [sModal, setSModal] = useState(false);
+  const [verifiedUser, setVerifiedUser] = useState('');
+  const navigate = useNavigate();
+  const token = localStorage.getItem("jwt");
 
   const toggleScroll = () => {
     
@@ -21,8 +24,8 @@ const Navbar = (props) => {
   };
 
   const loginStatus = () => {
-    const token = localStorage.getItem("jwt");
-    if (token || props.login) {
+  
+    if (verifiedUser || props.login) {
       return [
         <>
           <nav className="main-menu">
@@ -110,8 +113,8 @@ const Navbar = (props) => {
   };
 
   const loginStatusMobile = () => {
-    const token = localStorage.getItem("jwt");
-    if (token || props.login) {
+   
+    if (verifiedUser || props.login) {
       return [
         <>
           <nav className="mob-main-menu">
@@ -177,6 +180,29 @@ const Navbar = (props) => {
     toggleScroll();
   });
 
+  useEffect(() => {
+    const verifyToken= async (e) => {
+      const fetchSignIn = await fetch("/verifyToken", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token:localStorage.getItem("jwt"),
+        }),
+      });
+      const response = await fetchSignIn.json();
+      if (response.res) {
+        setVerifiedUser(true);
+      } else {
+        localStorage.removeItem("jwt");
+        setVerifiedUser(false);
+        navigate("/signIn");
+      }
+    };
+    verifyToken();
+  }, [token]);
+  
   return (
     <div className="main-navbar">
       <ul className="nav-lap">{loginStatus()}</ul>

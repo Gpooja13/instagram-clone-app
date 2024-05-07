@@ -65,6 +65,23 @@ router.post("/signIn", (req, res) => {
   });
 });
 
+router.post("/verifyToken", (req, res) => {
+  const { token } = req.body;
+  if (!token) {
+    return res.status(422).json({ error: "Please login again" });
+  }
+  try {
+    const decoded = jwt.verify(token, jwtSecret);
+    if (decoded) {
+      return res.status(200).json({ res: verified, decoded: decoded });
+    } else {
+      return res.status(422).json({ error: "Invalid token" });
+    }
+  } catch (error) {
+    console.error("Token verification failed:", error);
+  }
+});
+
 router.post("/googleLogin", (req, res) => {
   const { email_verified, email, name, clientId, username, Photo } = req.body;
   if (email_verified) {
