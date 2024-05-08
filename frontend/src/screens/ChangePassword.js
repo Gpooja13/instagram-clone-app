@@ -60,9 +60,13 @@ const ChangePassword = () => {
   return (
     <div className="signIn">
       <div className="container main-content">
+      
         <form onSubmit={resetPassword}>
           <div className="center">
             <img className="signIn-logo" src={logo_word} alt="Instagram" />
+            <p style={{ color: "black" ,fontWeight:"500",fontSize: "large"}}>
+                Update your password
+              </p>
           </div>
           <div className="form-floating">
             <input
