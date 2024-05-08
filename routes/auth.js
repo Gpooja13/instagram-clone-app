@@ -139,7 +139,7 @@ router.post("/forgot", async (req, res) => {
     from: '"Insta-Clone 👻" <maddison53@ethereal.email>', // sender address
     to: email, // list of receivers
     subject: "Reset Password ✔", // Subject line
-    html: `<div><h2>Reset Password</h2><span>Generated URL :<a href="https://instagram-clone-app-mrhb.onrender.com/updatePassword/${token}">Click here to reset Password</a> </span></div>`, // html body
+    html: `<div><h2>Reset Password</h2><span>Generated URL :<a href="https://instagram-clone-app-mrhb.onrender.com/${token}">Click here to reset Password</a> </span></div>`, // html body
   });
   if (!info) {
     return res.status(422).json({ error: "Error! Try Again." });

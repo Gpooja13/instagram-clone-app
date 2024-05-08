@@ -40,7 +40,7 @@ function App() {
             <Route path="/signIn" element={<SignIn />} />
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/forgot" element={<Forgot />} />
-            <Route path="/updatePassword/:token" element={<ChangePassword/>} />
+            <Route path="/:token" element={<ChangePassword/>} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/createPost" element={<CreatePost />} />
             <Route path="/profile/:userid" element={<UserProfile />} />
