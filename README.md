@@ -5,7 +5,7 @@
 
 # React Instagram Clone 
 
-This project is a clone of the popular social media platform Instagram, built using React JS. 
+This project is a clone of the popular social media platform Instagram, built using the MERN stack.
 
 The purpose of this clone is to replicate the core functionalities of Instagram, allowing users to share photos, follow other users, like and comment on posts, and explore content posted by others, with the user interface of the popular social media platform - Instagram.
 
@@ -23,8 +23,10 @@ The purpose of this clone is to replicate the core functionalities of Instagram,
 
 ## Demo
 
-The E-commerce demo can be viewed online here:
+The E-commerce website can be viewed online here:
 https://instagram-clone-app-mrhb.onrender.com
+
+Check out demo video here: [Demo video](https://res.cloudinary.com/cloudtrial/video/upload/v1715411745/InShot_20240510_180418462_ve5ro8.mp4)
 
 
 ## Screenshots
@@ -40,6 +42,9 @@ https://instagram-clone-app-mrhb.onrender.com
 
 - User Profile
 ![Profile](https://res.cloudinary.com/cloudtrial/image/upload/v1715067750/Screenshot_221_pyocbi.png)
+
+- Create Post
+![Create Post](https://res.cloudinary.com/cloudtrial/image/upload/v1715067746/Screenshot_216_cpdqds.png)
 
 ## Tech Stack
 
@@ -98,6 +103,7 @@ npm install
 ## Acknowledgements
 
 This project was inspired by the Instagram app.
+
 Special thanks to the developers of React, React Router, Material-UI, and other open-source libraries used in this project.
 
 
