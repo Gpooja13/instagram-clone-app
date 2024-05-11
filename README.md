@@ -23,7 +23,7 @@ The purpose of this clone is to replicate the core functionalities of Instagram,
 
 ## Demo
 
-The E-commerce website can be viewed online here:
+The social media website can be viewed online here:
 https://instagram-clone-app-mrhb.onrender.com
 
 Check out demo video here: [Demo video](https://res.cloudinary.com/cloudtrial/video/upload/v1715411745/InShot_20240510_180418462_ve5ro8.mp4)
